@@ -17,7 +17,7 @@
     "@aws-sdk/client-pricing": "^3.1116.0",
     "@azure/identity": "^4.13.2",
     "@azure/search-documents": "^13.0.0",
-    "ipaddr.js": "^2.2.0",
+    "ipaddr.js": "^2.5.0",
     "jspdf": "^4.2.1",
     "lucide-react": "0.468.0",
     "react": "18.3.1",
