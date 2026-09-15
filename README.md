@@ -100,8 +100,11 @@ The application does not require an Azure OpenAI API key. Server-side middleware
 
 - Local development uses credentials from Azure CLI, VS Code, or another supported developer credential.
 - Azure App Service uses its system-assigned managed identity.
+- Production mode requires authenticated API requests by default. Enable Azure App Service Authentication (Easy Auth) with Microsoft Entra ID so App Service validates the user and supplies the trusted principal headers.
 - The runtime identity must have the `Cognitive Services OpenAI User` role on the target Azure AI resource.
 - Endpoint URLs, deployment names, API versions, subscription IDs, and resource names are identifiers, not credentials.
+
+Set `API_REQUIRE_AUTH=false` only for local preview or an isolated development environment. Do not disable it on an internet-facing deployment. The application-level check supplements Easy Auth; it does not replace platform token validation.
 
 Never commit `.env` files, API keys, access tokens, client secrets, or connection strings.
 
@@ -112,6 +115,7 @@ Never commit `.env` files, API keys, access tokens, client secrets, or connectio
 | `AZURE_OPENAI_ENDPOINT` | Yes | Azure AI resource endpoint |
 | `AZURE_OPENAI_DEPLOYMENT` | Yes | Deployed model name |
 | `AZURE_OPENAI_API_VERSION` | Yes | Azure OpenAI-compatible API version |
+| `API_REQUIRE_AUTH` | Production default: `true` | Requires App Service-authenticated principal headers on API requests |
 | `AZURE_SEARCH_ENDPOINT` | No | Azure AI Search endpoint for evidence indexing and retrieval |
 | `AZURE_SEARCH_EVIDENCE_INDEX` | No | Existing evidence index name |
 | `EVIDENCE_PROVIDER` | No | Limits refresh to `Azure`, `AWS`, or `Google Cloud` |
@@ -186,9 +190,10 @@ For Azure App Service:
 
 1. Deploy to a Linux App Service or custom container runtime.
 2. Set the Azure endpoint, deployment, and API version as App Service application settings.
-3. Enable the system-assigned managed identity.
-4. Grant that identity `Cognitive Services OpenAI User` on the Azure AI resource.
-5. Use `npm start` as the startup command for a source/ZIP deployment.
+3. Enable App Service Authentication with Microsoft Entra ID and require authentication for unauthenticated requests.
+4. Enable the system-assigned managed identity.
+5. Grant that identity `Cognitive Services OpenAI User` on the Azure AI resource.
+6. Use `npm start` as the startup command for a source/ZIP deployment.
 
 Prefer managed identity and role-based access control over stored API keys. Use HTTPS, keep model calls server-side, and avoid logging prompts, bearer tokens, or sensitive assessment content.
 

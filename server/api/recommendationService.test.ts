@@ -14,6 +14,10 @@ describe('recommendation service', () => {
   it('validates complete requests and rejects malformed assessments', () => {
     expect(isRecommendationRequest({ assessment })).toBe(true)
     expect(isRecommendationRequest({ assessment: { problem: 'short' } })).toBe(false)
+    expect(isRecommendationRequest({ assessment: { ...assessment, signals: { ...assessment.signals, realTime: 'yes' } } })).toBe(false)
+    expect(isRecommendationRequest({ assessment: { ...assessment, capabilities: Array(21).fill('Capability') } })).toBe(false)
+    expect(isRecommendationRequest({ assessment: { ...assessment, integrations: 'x'.repeat(2_001) } })).toBe(false)
+    expect(isRecommendationRequest({ assessment, platform: 'Unknown provider' })).toBe(false)
   })
 
   it('uses scoped Search evidence for deterministic eligibility and cost', async () => {

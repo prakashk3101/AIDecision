@@ -16,15 +16,17 @@ ENV NODE_ENV=production
 ENV PORT=8080
 
 COPY package*.json ./
-RUN npm ci
+RUN npm ci && npm cache clean --force
 
-COPY --from=build /app/dist ./dist
-COPY --from=build /app/vite.config.ts ./vite.config.ts
-COPY --from=build /app/tsconfig.json ./tsconfig.json
-COPY --from=build /app/tsconfig.node.json ./tsconfig.node.json
-COPY --from=build /app/server ./server
-COPY --from=build /app/src ./src
+COPY --chown=node:node --from=build /app/dist ./dist
+COPY --chown=node:node --from=build /app/vite.config.ts ./vite.config.ts
+COPY --chown=node:node --from=build /app/tsconfig.json ./tsconfig.json
+COPY --chown=node:node --from=build /app/tsconfig.node.json ./tsconfig.node.json
+COPY --chown=node:node --from=build /app/server ./server
+COPY --chown=node:node --from=build /app/src ./src
 
 EXPOSE 8080
+
+USER node
 
 CMD ["npm", "start"]

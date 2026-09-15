@@ -19,6 +19,13 @@ export type RecommendationResponse = {
 }
 
 let hydratedVersion = ''
+const platforms = new Set(['Azure', 'AWS', 'Google Cloud', 'Open source'])
+const signalNames = ['predictiveScoring', 'documentProcessing', 'knowledgeRetrieval', 'generativeResponse', 'toolExecution', 'workflowOrchestration', 'humanReview', 'eventStreaming', 'realTime'] as const
+
+const boundedString = (value: unknown, minLength: number, maxLength: number) => typeof value === 'string' && value.trim().length >= minLength && value.length <= maxLength
+const boundedStringList = (value: unknown, maxItems: number) => Array.isArray(value)
+  && value.length <= maxItems
+  && value.every(item => boundedString(item, 1, 200))
 
 async function ensureCatalog() {
   const payload = JSON.parse(await readFile(resolve('server/catalog/decision-catalog.json'), 'utf8')) as DecisionCatalog
@@ -30,8 +37,26 @@ async function ensureCatalog() {
 
 export function isRecommendationRequest(value: unknown): value is RecommendationRequest {
   if (!value || typeof value !== 'object') return false
-  const assessment = (value as Partial<RecommendationRequest>).assessment
-  return Boolean(assessment && typeof assessment.name === 'string' && typeof assessment.problem === 'string' && assessment.problem.trim().length >= 20 && assessment.signals && Array.isArray(assessment.regulatoryRequirements) && Array.isArray(assessment.securityRequirements))
+  const request = value as Partial<RecommendationRequest>
+  const assessment = request.assessment
+  if (!assessment || typeof assessment !== 'object') return false
+  const requiredShortFields = [assessment.name, assessment.scale, assessment.aiRequirement, assessment.latency, assessment.sensitivity, assessment.monthlyRequests, assessment.peakRequestsPerMinute, assessment.cloudPreference]
+  const validSignals = assessment.signals && signalNames.every(name => typeof assessment.signals[name] === 'boolean')
+  return boundedString(assessment.problem, 20, 8_000)
+    && requiredShortFields.every(field => boundedString(field, 1, 200))
+    && boundedString(assessment.existingTechnology, 0, 2_000)
+    && boundedString(assessment.integrations, 0, 2_000)
+    && boundedStringList(assessment.regulatoryRequirements, 20)
+    && boundedStringList(assessment.securityRequirements, 20)
+    && boundedStringList(assessment.capabilities, 20)
+    && boundedStringList(assessment.workloads, 20)
+    && boundedStringList(assessment.assumptions, 20)
+    && boundedStringList(assessment.potentialCompliance, 20)
+    && (assessment.requiresSourceCitations === null || typeof assessment.requiresSourceCitations === 'boolean')
+    && Boolean(validSignals)
+    && (assessment.availabilityTarget === undefined || boundedString(assessment.availabilityTarget, 1, 50))
+    && (assessment.monthlyBudget === undefined || (Number.isFinite(assessment.monthlyBudget) && assessment.monthlyBudget >= 0 && assessment.monthlyBudget <= 1_000_000_000))
+    && (request.platform === undefined || platforms.has(request.platform))
 }
 
 export function recommendationResponse(result: DecisionResult): RecommendationResponse {
@@ -49,7 +74,9 @@ export function recommendationResponse(result: DecisionResult): RecommendationRe
 
 export async function createRecommendation(request: RecommendationRequest, dependencies: RecommendationDependencies = { search: searchEvidence }) {
   await ensureCatalog()
-  const freshAfter = new Date(Date.now() - Number(process.env.EVIDENCE_MAX_AGE_DAYS ?? 90) * 86_400_000).toISOString()
+  const configuredMaxAge = Number(process.env.EVIDENCE_MAX_AGE_DAYS ?? 90)
+  const maxAgeDays = Number.isFinite(configuredMaxAge) ? Math.max(1, Math.min(3_650, configuredMaxAge)) : 90
+  const freshAfter = new Date(Date.now() - maxAgeDays * 86_400_000).toISOString()
   const overlays: Record<string, DecisionResult['recommended']['evidence']> = {}
   await Promise.all(architectureCatalog.map(async architecture => {
     const result = await dependencies.search({ architectureId: architecture.id, provider: request.platform, freshAfter, limit: 100 })

@@ -8,6 +8,11 @@ import { searchEvidence } from './server/evidence/azureAiSearchEvidenceStore.js'
 import type { EvidenceSearchQuery } from './src/search/searchTypes.js'
 import { createRecommendation, isRecommendationRequest } from './server/api/recommendationService.js'
 import { explanationMessages, isExplanationRequest, isRecommendationExplanation } from './server/api/explanationService.js'
+import { createApiSecurityMiddleware } from './server/api/httpSecurity.js'
+
+const maxRequestBodyBytes = 262_144
+const evidenceDimensions = new Set(['cost', 'performance', 'scalability', 'security', 'availability', 'quality', 'reliability'])
+const evidenceSourceTypes = new Set(['official-api', 'official-documentation', 'official-sla', 'independent-benchmark', 'internal-benchmark', 'expert-rule', 'assumption'])
 
 type ArchitectureAnalysis = {
   capabilities: string[]
@@ -116,17 +121,50 @@ function isArchitectureAnalysis(value: unknown): value is ArchitectureAnalysis {
 }
 
 async function readJsonBody(request: IncomingMessage) {
-  let body = ''
+  const contentType = request.headers['content-type']?.split(';', 1)[0].trim().toLowerCase()
+  if (contentType !== 'application/json') throw new HttpRequestError(415, 'Content-Type must be application/json.')
+  const contentLength = Number(request.headers['content-length'])
+  if (Number.isFinite(contentLength) && contentLength > maxRequestBodyBytes) throw new HttpRequestError(413, 'Request is too large.')
+  const chunks: Buffer[] = []
+  let totalBytes = 0
   for await (const chunk of request) {
-    body += chunk
-    if (body.length > 262_144) throw new Error('Request is too large.')
+    const bytes = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk)
+    totalBytes += bytes.byteLength
+    if (totalBytes > maxRequestBodyBytes) throw new HttpRequestError(413, 'Request is too large.')
+    chunks.push(bytes)
   }
-  return JSON.parse(body) as unknown
+  try {
+    return JSON.parse(Buffer.concat(chunks).toString('utf8')) as unknown
+  } catch {
+    throw new HttpRequestError(400, 'Request body must contain valid JSON.')
+  }
+}
+
+class HttpRequestError extends Error {
+  constructor(readonly status: number, message: string) {
+    super(message)
+  }
 }
 
 function sendJson(response: ServerResponse, status: number, body: unknown) {
-  response.writeHead(status, { 'Content-Type': 'application/json' })
+  response.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8' })
   response.end(JSON.stringify(body))
+}
+
+function sendRequestError(response: ServerResponse, error: unknown, fallbackStatus: number, fallbackMessage: string) {
+  if (error instanceof HttpRequestError) {
+    sendJson(response, error.status, { error: error.message })
+    return
+  }
+  sendJson(response, fallbackStatus, { error: fallbackMessage })
+}
+
+function apiSecurityPlugin(requireAuthentication: boolean, isDevelopment: boolean): Plugin {
+  const middleware = createApiSecurityMiddleware({ requireAuthentication, isDevelopment })
+  const attach = (server: { middlewares: { use: (handler: typeof middleware) => unknown } }) => {
+    server.middlewares.use(middleware)
+  }
+  return { name: 'api-security', enforce: 'pre', configureServer: attach, configurePreviewServer: attach }
 }
 
 function architectureCatalogPlugin(): Plugin {
@@ -159,20 +197,30 @@ function evidenceSearchPlugin(): Plugin {
     }
     try {
       const url = new URL(request.url, 'http://localhost')
+      const boundedText = (name: string, maxLength = 200) => {
+        const value = url.searchParams.get(name)?.trim()
+        if (value && value.length > maxLength) throw new HttpRequestError(400, `${name} is too long.`)
+        return value || undefined
+      }
+      const dimension = boundedText('dimension', 32)
+      const sourceType = boundedText('sourceType', 40)
+      if (dimension && !evidenceDimensions.has(dimension)) throw new HttpRequestError(400, 'Invalid evidence dimension.')
+      if (sourceType && !evidenceSourceTypes.has(sourceType)) throw new HttpRequestError(400, 'Invalid evidence source type.')
+      const requestedLimit = Number.parseInt(url.searchParams.get('limit') ?? '25', 10)
       const query: EvidenceSearchQuery = {
-        text: url.searchParams.get('text') ?? undefined,
-        provider: url.searchParams.get('provider') ?? undefined,
-        dimension: (url.searchParams.get('dimension') as EvidenceSearchQuery['dimension']) ?? undefined,
-        architectureId: url.searchParams.get('architectureId') ?? undefined,
-        modelId: url.searchParams.get('modelId') ?? undefined,
-        sourceType: (url.searchParams.get('sourceType') as EvidenceSearchQuery['sourceType']) ?? undefined,
-        freshAfter: url.searchParams.get('freshAfter') ?? undefined,
-        limit: Number(url.searchParams.get('limit') ?? 25),
+        text: boundedText('text', 500),
+        provider: boundedText('provider'),
+        dimension: dimension as EvidenceSearchQuery['dimension'],
+        architectureId: boundedText('architectureId'),
+        modelId: boundedText('modelId'),
+        sourceType: sourceType as EvidenceSearchQuery['sourceType'],
+        freshAfter: boundedText('freshAfter', 40),
+        limit: Number.isFinite(requestedLimit) ? Math.max(1, Math.min(100, requestedLimit)) : 25,
       }
       sendJson(response, 200, await searchEvidence(query))
     } catch (error) {
       console.error('Evidence search failed:', error instanceof Error ? error.message : error)
-      sendJson(response, 500, { error: 'Evidence search is unavailable.' })
+      sendRequestError(response, error, 500, 'Evidence search is unavailable.')
     }
   }
   const attach = (server: { middlewares: { use: (handler: typeof middleware) => unknown } }) => {
@@ -197,7 +245,7 @@ function recommendationPlugin(): Plugin {
       sendJson(response, 200, await createRecommendation(body))
     } catch (error) {
       console.error('Recommendation failed:', error instanceof Error ? error.message : error)
-      sendJson(response, 500, { error: 'Recommendation could not be calculated.' })
+      sendRequestError(response, error, 500, 'Recommendation could not be calculated.')
     }
   }
   const attach = (server: { middlewares: { use: (handler: typeof middleware) => unknown } }) => {
@@ -247,6 +295,7 @@ function azureAnalysisPlugin(endpoint: string, deployment: string, apiVersion: s
           method: 'POST',
           headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
           body: JSON.stringify({ messages: explanationMessages(body.recommendation), response_format: { type: 'json_object' }, max_completion_tokens: 900 }),
+          signal: AbortSignal.timeout(30_000),
         })
         if (!azureResponse.ok) throw new Error(`Azure AI returned ${azureResponse.status}.`)
         const completion = await azureResponse.json() as { model?: string; choices?: Array<{ message?: { content?: string } }> }
@@ -269,6 +318,7 @@ function azureAnalysisPlugin(endpoint: string, deployment: string, apiVersion: s
       const azureResponse = await fetch(`${endpoint.replace(/\/$/, '')}/openai/deployments/${encodeURIComponent(deployment)}/chat/completions?api-version=${encodeURIComponent(apiVersion)}`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
+        signal: AbortSignal.timeout(30_000),
         body: JSON.stringify({
           messages: [
             {
@@ -290,7 +340,7 @@ function azureAnalysisPlugin(endpoint: string, deployment: string, apiVersion: s
       sendJson(response, 200, { ...analysis, model: completion.model ?? deployment, analyzedAt: new Date().toISOString() })
     } catch (error) {
       console.error('Azure analysis failed:', error instanceof Error ? error.message : error)
-      sendJson(response, 502, { error: 'Live AI analysis is temporarily unavailable.' })
+      sendRequestError(response, error, 502, 'Live AI analysis is temporarily unavailable.')
     }
   }
 
@@ -305,8 +355,9 @@ export default defineConfig(({ mode }) => {
   const endpoint = env.AZURE_OPENAI_ENDPOINT ?? 'https://cog-x42asfknbrhss.cognitiveservices.azure.com/'
   const deployment = env.AZURE_OPENAI_DEPLOYMENT ?? 'gpt-5.4-mini'
   const apiVersion = env.AZURE_OPENAI_API_VERSION ?? '2025-04-01-preview'
+  const requireAuthentication = env.API_REQUIRE_AUTH ? env.API_REQUIRE_AUTH === 'true' : mode === 'production'
   return {
-    plugins: [react(), architectureCatalogPlugin(), evidenceSearchPlugin(), recommendationPlugin(), azureAnalysisPlugin(endpoint, deployment, apiVersion)],
+    plugins: [apiSecurityPlugin(requireAuthentication, mode !== 'production'), react(), architectureCatalogPlugin(), evidenceSearchPlugin(), recommendationPlugin(), azureAnalysisPlugin(endpoint, deployment, apiVersion)],
     server: { host: '127.0.0.1' },
     preview: {
       allowedHosts: ['aidecision-hfcefqfucseahxaa.westus3-01.azurewebsites.net'],
