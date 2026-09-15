@@ -1,0 +1,86 @@
+[
+  {
+    "scene": "01-dashboard.png",
+    "duration": 90,
+    "title": "Opening and problem",
+    "narration": "Every enterprise wants to build AI solutions faster. But before a team writes a single line of code, someone has to answer the hard architecture questions. Which pattern actually fits this use case? Which model is safe and cost-effective? Will it meet latency? Can it pass security and compliance review? And what will the monthly cost look like once token usage scales? Today, most of those decisions are made through spreadsheets, meetings, assumptions, and slide decks. That creates three problems. Decisions are slow. Trade-offs are hard to prove. And cost surprises appear only after the system is already built. Our hackathon idea is the AI Architecture Decision Engine. It turns a business use case into an auditable architecture recommendation. AI helps extract the requirements, but deterministic engineering gates make the decision. This is the Dashboard. It shows recent assessments, projected monthly cost, and projected token consumption, alongside the solution architecture itself, which we will walk through now."
+  },
+  {
+    "scene": "02-assessment.png",
+    "duration": 88,
+    "title": "Requirements capture",
+    "narration": "Clicking a saved assessment from the Dashboard reopens it directly in New Assessment, fully prefilled, so architects can review or adjust requirements without retyping the business case. The New Assessment page captures architecture-significant requirements instead of asking users to pick technology prematurely. We describe the business outcome in natural language, set enterprise scale, choose the AI requirement, and set a response-time target. For our example, an intelligent travel-planning system, the workload needs generative AI, tool calling, orchestration, retrieval, state management, and human approval for sensitive bookings. Azure AI analyzes the text and extracts capabilities and workload signals, but it does not make the final decision. Extracted signals become structured inputs into deterministic gates. Advanced requirements capture compliance frameworks, security controls, cloud preference, existing technology, and integrations. Everything here is explicit, editable, and traceable, so the recommendation that follows is never a black box."
+  },
+  {
+    "scene": "03-recommendation.png",
+    "duration": 95,
+    "title": "Deterministic recommendation",
+    "narration": "After generation, the deterministic decision engine evaluates every catalog architecture against the same mandatory requirements. This is not a mysterious numeric score. The Requirement Fit panel shows eligible, partially eligible, and not-eligible candidates, with met, not-met, and estimated gates called out individually for AI capability, tool calling, orchestration, knowledge retrieval, security, capacity, availability, and cost. Ranking is gate-first. A candidate that fails a hard requirement is never eligible, no matter how attractive its cost looks. Among eligible candidates, ranking falls back to evidence completeness, capability overreach, available monthly cost, and implementation complexity, using stable, deterministic tie-breakers. There are no user-adjustable weights here. The same inputs always produce the same ranked outcome, which is exactly what a governance review needs. The architecture options panel still lets reviewers inspect rejected and partially eligible alternatives side by side with the recommendation, so nothing useful is hidden."
+  },
+  {
+    "scene": "04-architecture.png",
+    "duration": 92,
+    "title": "Solution architecture",
+    "narration": "The interactive architecture diagram maps the recommended pattern to concrete platform products. Channels cover web, mobile, operations, and partner APIs. Edge and network components handle entry points, identity, and private connectivity. Services host application and integration logic. The AI and guardrails layer contains the selected model, agent orchestrator, tool gateway, retrieval, and safety controls. Data and operations components maintain state, monitoring, and audit evidence. Every component links back to a specific functional or non-functional requirement, so nothing on this diagram is decorative. On Azure, this can map to Microsoft Foundry Agent Service for orchestration, Azure API Management for governance, Azure Cosmos DB for state, and Azure Logic Apps for human approval. The same logical architecture maps just as cleanly to AWS, Google Cloud, or an open-source stack, which is exactly what we show next in Compare."
+  },
+  {
+    "scene": "05-decision-trace.png",
+    "duration": 90,
+    "title": "Evidence and decision trace",
+    "narration": "The Decision Trace is the audit trail behind the recommendation. Every row connects one requirement to its supporting evidence and its verdict. Measured results are marked met or not met directly. When only an estimate exists, the underlying evidence stays conservative, but the display verdict still shows whether that estimate lands within the target, so the trace never shows a confusing unresolved checkmark. Latency composes architecture overhead, model time-to-first-token, and decode time. Capacity is compared against peak requests per second. Security controls resolve independently, so one missing control never silently fails unrelated controls. Expected monthly cost is backed by real resource quantities and official provider prices, or it is explicitly marked unavailable rather than shown as a false zero. The trace also explains rejected architectures. This lets an architect, a security reviewer, a finance partner, and a business owner challenge individual assumptions instead of arguing about one unexplained overall score."
+  },
+  {
+    "scene": "06-cloud-compare.png",
+    "duration": 82,
+    "title": "Cloud comparison",
+    "narration": "Compare evaluates the same workload across two cloud platforms side by side. Reviewers can select Azure, AWS, Google Cloud, or an open-source deployment on either side. The view intentionally focuses only on decision-driving differences: recommended architecture, eligibility, monthly cost, latency, capacity, availability, selected model, and changed service mappings. Logical components stay stable while implementation products change underneath them. Provider pricing is never borrowed across clouds. Azure costs use Azure's own official prices; a provider without collected pricing evidence shows cost as pending rather than guessing. This keeps the comparison honest even when the evidence for one side is incomplete, which is a deliberate design choice, not a limitation we are hiding."
+  },
+  {
+    "scene": "07-what-if-inputs.png",
+    "duration": 80,
+    "title": "Cost optimization: what-if scenario",
+    "narration": "Cost Optimization is where we unify scenario planning, token optimization, and model selection into one workflow. The What-If Scenario tab lets reviewers change latency target, monthly traffic, AI mode, sensitivity, availability, compliance, and cloud provider, and rerun the exact same deterministic engine used for the baseline assessment. There is deliberately no budget slider here. Cost should be an observed consequence of a scenario, not an artificial gate hidden inside the recommendation. Changing availability changes replica counts. Changing traffic changes compute, search partitions, and token consumption. Changing provider changes service mappings and requires that provider's own pricing evidence before a cost appears."
+  },
+  {
+    "scene": "08-what-if-results.png",
+    "duration": 82,
+    "title": "What-if results",
+    "narration": "Running a scenario shows whether the recommendation changes, and exactly why. Before and after cards compare architecture, provider, status, cost, and latency. The impact section lists passed, unknown, and failed gates alongside the monthly cost change. Any newly invalidated candidate shows the precise hard requirement it no longer satisfies. Every cost change is traceable to a resource category, not a generic percentage. This scenario feeds directly into the rest of Cost Optimization, so the token and model views we see next always reflect the latest assumptions."
+  },
+  {
+    "scene": "09-cost-analysis.png",
+    "duration": 95,
+    "title": "Token optimizer",
+    "narration": "The Token Optimizer tab treats token spend as an architecture problem, not just a model problem. It starts from an immutable baseline: current requests, input tokens, output tokens, and cached tokens for this exact use case. Nine optimization opportunities are available, each gated by the workload's actual signals, including reducing RAG context, trimming conversation history, limiting output size, enabling prompt caching, caching common responses, reducing agent and tool calls, removing duplicate context, and routing to a lower-cost valid model. Critically, every option now explains itself in terms of this specific assessment. It names the actual workloads, the actual architecture, and the actual latency, security, and compliance targets it must respect, instead of generic best-practice text. Selecting one or more opportunities recalculates tokens, cost, latency, and quality sequentially against the unchanged baseline, and any scenario that would violate a hard requirement is rejected outright, with the reason shown."
+  },
+  {
+    "scene": "10-model-choice.png",
+    "duration": 85,
+    "title": "Model cost and selection",
+    "narration": "The Model Cost and Selection tab turns model comparison into a governed decision. Every listed model has already passed mandatory capability gates for this workload and cloud: hosting, tool calling, structured output, and context window. Models are then ranked using fixed catalog weights across workload quality, latency, cost efficiency, reasoning, security, and reliability. There are no adjustable priority sliders here anymore. Ranking is deterministic and reproducible. The architect can still see monthly cost, fit score, and rationale for every valid alternative, and can explicitly choose Use Model on any of them. That human decision is recorded, carried into Decide, and reset automatically if the assessment or cloud platform changes, so a choice never accidentally leaks across scenarios."
+  },
+  {
+    "scene": "11-model-selected.png",
+    "duration": 78,
+    "title": "Human model selection",
+    "narration": "Here we explicitly select an alternative model that still passes every mandatory gate for this workload. The moment it is selected, the engine recalculates the token cost using this scenario's request volume and token profile, updates the model evidence, the AI cost breakdown, the expected monthly total, and the technology labels shown elsewhere in the app. This is the core governance principle of the whole system: deterministic logic limits the field to valid choices, and the human architect makes the final trade-off among those valid choices. That selection now carries forward into the final decision."
+  },
+  {
+    "scene": "12-final-decision.png",
+    "duration": 88,
+    "title": "Final decision",
+    "narration": "The Decide page consolidates the latest scenario, the selected model, and any applied token optimization into one final view. The banner shows the selected architecture, platform, status, confidence, and final monthly cost. Performance shows measured latency when available, or the composed estimate with a clear met or not-met verdict instead of an ambiguous unknown. Scalability and availability behave the same way, always preferring measured evidence and falling back to a clearly labeled estimate. Security summarizes any missing controls. This page uses larger type deliberately, because it is the approval surface: a decision maker should be able to review it without reading a single line of code."
+  },
+  {
+    "scene": "13-final-architecture.png",
+    "duration": 78,
+    "title": "Final architecture and model",
+    "narration": "The detailed final architecture view maps channels and functional layers to the concrete products for the approved option, so it doubles as an implementation blueprint. The selected model panel shows provider, hosting platform, fit score, token cost, context size, reasoning, security, and reliability for the model the architect actually chose, not the original baseline recommendation. Security, compliance, and observability panels list active controls and mapped platform telemetry, turning the recommendation into an artifact teams can act on directly during implementation planning."
+  },
+  {
+    "scene": "14-final-cost-adr.png",
+    "duration": 77,
+    "title": "Cost, ADR, and close",
+    "narration": "The final cost panel combines infrastructure and selected-model inference cost into one expected monthly total with a low-to-high planning range and a full category breakdown. Provider-specific official prices are required throughout; one cloud's prices are never reused for another. From here, the architect downloads the Architecture Decision Record, turning this session into a reviewable governance artifact for security, finance, and delivery teams. In summary, the AI Architecture Decision Engine connects natural-language requirements, deterministic eligibility gates, real evidence, architecture topology, model benchmarks, provider pricing, what-if analysis, use-case-aware token optimization, explicit human model selection, and automated documentation. It makes AI architecture decisions faster, cheaper, and genuinely defensible. Thank you for watching our hackathon demonstration."
+  }
+]

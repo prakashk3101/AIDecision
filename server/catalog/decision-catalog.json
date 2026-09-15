@@ -1,0 +1,5470 @@
+{
+  "catalogVersion": "2026.08.29-evidence.1",
+  "lastUpdated": "2026-08-29T11:14:01.102Z",
+  "collection": {
+    "pricingQueries": [
+      {
+        "id": "azure-compute-appservice-p1mv4",
+        "provider": "Azure",
+        "service": "Azure App Service",
+        "region": "eastus",
+        "sku": "P1mv4",
+        "product": "Azure App Service Premium v4 Plan",
+        "resourceCategory": "compute",
+        "targetUnit": "instance-hour",
+        "unitScale": 1,
+        "conversionNote": "App Service Premium v4 P1mv4 is billed per hour; one compute unit maps to one instance-hour."
+      },
+      {
+        "id": "azure-database-cosmos-autoscale",
+        "provider": "Azure",
+        "service": "Azure Cosmos DB",
+        "region": "eastus",
+        "sku": "AP2",
+        "product": "Azure Cosmos DB autoscale",
+        "meterName": "AP2 Entry Price",
+        "resourceCategory": "database",
+        "targetUnit": "database-hour",
+        "unitScale": 1,
+        "conversionNote": "Cosmos DB autoscale AP2 is billed per hour of provisioned throughput, matching the estimator's per-database-hour unit."
+      },
+      {
+        "id": "azure-storage-hot-lrs",
+        "provider": "Azure",
+        "service": "Storage",
+        "region": "eastus",
+        "sku": "Hot LRS",
+        "product": "Blob Storage",
+        "meterName": "Hot LRS Data Stored",
+        "resourceCategory": "storage",
+        "targetUnit": "GB-month",
+        "unitScale": 1,
+        "conversionNote": "Blob Storage Hot LRS is billed per GB/month, matching the estimator unit directly."
+      },
+      {
+        "id": "azure-networking-inter-region",
+        "provider": "Azure",
+        "service": "Bandwidth",
+        "region": "eastus",
+        "sku": "Standard",
+        "meterName": "Standard Inter-Region Data Transfer",
+        "resourceCategory": "networking",
+        "targetUnit": "GB",
+        "unitScale": 1,
+        "conversionNote": "Inter-region data transfer is billed per GB, matching the estimator unit directly."
+      },
+      {
+        "id": "azure-monitoring-basic-logs",
+        "provider": "Azure",
+        "service": "Azure Monitor",
+        "region": "eastus",
+        "sku": "Basic Logs",
+        "meterName": "Basic Logs Data Ingestion",
+        "resourceCategory": "monitoring",
+        "targetUnit": "1K-events",
+        "unitScale": 1000,
+        "conversionNote": "ASSUMPTION: Log Analytics bills per GB ingested, not per event. 1,000 telemetry events are modelled as 1 MB, so the per-GB price is divided by 1,000."
+      },
+      {
+        "id": "azure-security-defender-servers",
+        "provider": "Azure",
+        "service": "Microsoft Defender for Cloud",
+        "region": "eastus",
+        "sku": "Standard v2",
+        "product": "Microsoft Defender for Servers",
+        "meterName": "Standard v2 Node",
+        "resourceCategory": "security",
+        "targetUnit": "protected-instance-hour",
+        "unitScale": 1,
+        "conversionNote": "Defender for Servers is billed per protected node hour, matching the estimator unit directly."
+      },
+      {
+        "id": "azure-messaging-servicebus-basic",
+        "provider": "Azure",
+        "service": "Service Bus",
+        "region": "eastus",
+        "sku": "Basic",
+        "meterName": "Basic Messaging Operations",
+        "resourceCategory": "messaging",
+        "targetUnit": "operation",
+        "unitScale": 1000000,
+        "conversionNote": "Service Bus Basic is billed per 1M messaging operations; one workload request is modelled as one operation."
+      },
+      {
+        "id": "azure-search-basic-unit",
+        "provider": "Azure",
+        "service": "Azure Cognitive Search",
+        "region": "eastus",
+        "sku": "Basic CC",
+        "meterName": "Basic CC Unit",
+        "resourceCategory": "search",
+        "targetUnit": "search-unit-hour",
+        "unitScale": 1,
+        "conversionNote": "Azure AI Search is billed per provisioned search unit-hour. Search units equal partitions multiplied by replicas."
+      }
+    ],
+    "officialDocumentQueries": [
+      {
+        "id": "azure-sla-guidance",
+        "metric": "availability.slaPolicy",
+        "value": "configuration-specific",
+        "sourceType": "official-sla",
+        "sourceName": "Azure service-level agreement guidance",
+        "sourceUrl": "https://learn.microsoft.com/azure/reliability/concept-service-level-agreements"
+      },
+      {
+        "id": "azure-security-guidance",
+        "metric": "security.platformCapabilities",
+        "value": "documented",
+        "sourceType": "official-documentation",
+        "sourceName": "Azure security fundamentals",
+        "sourceUrl": "https://learn.microsoft.com/azure/security/fundamentals/overview"
+      }
+    ]
+  },
+  "collectedEvidence": {
+    "schemaVersion": "1.0",
+    "collectedAt": "2026-09-01T12:51:47.313Z",
+    "pricing": [
+      {
+        "id": "azure-messaging-servicebus-operations:9d0c5c5c-f0ff-48c2-8c68-9ee7ffd306af",
+        "provider": "Azure",
+        "service": "Service Bus",
+        "product": "Service Bus",
+        "sku": "Standard",
+        "region": "eastus",
+        "unit": "operation",
+        "unitPrice": 1.3441e-8,
+        "currency": "USD",
+        "effectiveFrom": "2018-05-01T00:00:00Z",
+        "resourceCategory": "messaging",
+        "targetUnit": "operation",
+        "providerUnit": "1/Hour",
+        "unitScale": 1000000,
+        "sourceUrl": "https://prices.azure.com/api/retail/prices",
+        "retrievedAt": "2026-08-30T15:43:42.638Z",
+        "rawReference": "9d0c5c5c-f0ff-48c2-8c68-9ee7ffd306af"
+      },
+      {
+        "id": "azure-messaging-servicebus-operations:d5034e45-00c1-48c6-8c00-c866f788e033",
+        "provider": "Azure",
+        "service": "Service Bus",
+        "product": "Service Bus",
+        "sku": "Standard",
+        "region": "eastus",
+        "unit": "operation",
+        "unitPrice": 0.00001,
+        "currency": "USD",
+        "effectiveFrom": "2018-05-01T00:00:00Z",
+        "resourceCategory": "messaging",
+        "targetUnit": "operation",
+        "providerUnit": "1/Month",
+        "unitScale": 1000000,
+        "sourceUrl": "https://prices.azure.com/api/retail/prices",
+        "retrievedAt": "2026-08-30T15:43:42.638Z",
+        "rawReference": "d5034e45-00c1-48c6-8c00-c866f788e033"
+      },
+      {
+        "id": "azure-messaging-servicebus-operations:2a9992f8-e914-490b-a7a6-6d21ba55acda",
+        "provider": "Azure",
+        "service": "Service Bus",
+        "product": "Service Bus",
+        "sku": "Standard",
+        "region": "eastus",
+        "unit": "operation",
+        "unitPrice": 5e-7,
+        "currency": "USD",
+        "effectiveFrom": "2017-08-15T00:00:00Z",
+        "resourceCategory": "messaging",
+        "targetUnit": "operation",
+        "providerUnit": "1M",
+        "unitScale": 1000000,
+        "sourceUrl": "https://prices.azure.com/api/retail/prices",
+        "retrievedAt": "2026-08-30T15:43:42.638Z",
+        "rawReference": "2a9992f8-e914-490b-a7a6-6d21ba55acda"
+      },
+      {
+        "id": "azure-messaging-servicebus-operations:2a9992f8-e914-490b-a7a6-6d21ba55acda",
+        "provider": "Azure",
+        "service": "Service Bus",
+        "product": "Service Bus",
+        "sku": "Standard",
+        "region": "eastus",
+        "unit": "operation",
+        "unitPrice": 8.000000000000001e-7,
+        "currency": "USD",
+        "effectiveFrom": "2017-08-15T00:00:00Z",
+        "resourceCategory": "messaging",
+        "targetUnit": "operation",
+        "providerUnit": "1M",
+        "unitScale": 1000000,
+        "sourceUrl": "https://prices.azure.com/api/retail/prices",
+        "retrievedAt": "2026-08-30T15:43:42.638Z",
+        "rawReference": "2a9992f8-e914-490b-a7a6-6d21ba55acda"
+      },
+      {
+        "id": "azure-messaging-servicebus-operations:2a9992f8-e914-490b-a7a6-6d21ba55acda",
+        "provider": "Azure",
+        "service": "Service Bus",
+        "product": "Service Bus",
+        "sku": "Standard",
+        "region": "eastus",
+        "unit": "operation",
+        "unitPrice": 2.0000000000000002e-7,
+        "currency": "USD",
+        "effectiveFrom": "2017-08-15T00:00:00Z",
+        "resourceCategory": "messaging",
+        "targetUnit": "operation",
+        "providerUnit": "1M",
+        "unitScale": 1000000,
+        "sourceUrl": "https://prices.azure.com/api/retail/prices",
+        "retrievedAt": "2026-08-30T15:43:42.638Z",
+        "rawReference": "2a9992f8-e914-490b-a7a6-6d21ba55acda"
+      },
+      {
+        "id": "azure-messaging-servicebus-operations:85f84482-123e-44a9-a2d5-cb53f2abe0f8",
+        "provider": "Azure",
+        "service": "Service Bus",
+        "product": "Service Bus",
+        "sku": "Standard",
+        "region": "eastus",
+        "unit": "operation",
+        "unitPrice": 3e-8,
+        "currency": "USD",
+        "effectiveFrom": "2014-12-01T00:00:00Z",
+        "resourceCategory": "messaging",
+        "targetUnit": "operation",
+        "providerUnit": "1",
+        "unitScale": 1000000,
+        "sourceUrl": "https://prices.azure.com/api/retail/prices",
+        "retrievedAt": "2026-08-30T15:43:42.638Z",
+        "rawReference": "85f84482-123e-44a9-a2d5-cb53f2abe0f8"
+      },
+      {
+        "id": "azure-messaging-servicebus-operations:85f84482-123e-44a9-a2d5-cb53f2abe0f8",
+        "provider": "Azure",
+        "service": "Service Bus",
+        "product": "Service Bus",
+        "sku": "Standard",
+        "region": "eastus",
+        "unit": "operation",
+        "unitPrice": 2.5000000000000002e-8,
+        "currency": "USD",
+        "effectiveFrom": "2014-12-01T00:00:00Z",
+        "resourceCategory": "messaging",
+        "targetUnit": "operation",
+        "providerUnit": "1",
+        "unitScale": 1000000,
+        "sourceUrl": "https://prices.azure.com/api/retail/prices",
+        "retrievedAt": "2026-08-30T15:43:42.638Z",
+        "rawReference": "85f84482-123e-44a9-a2d5-cb53f2abe0f8"
+      },
+      {
+        "id": "azure-messaging-servicebus-operations:85f84482-123e-44a9-a2d5-cb53f2abe0f8",
+        "provider": "Azure",
+        "service": "Service Bus",
+        "product": "Service Bus",
+        "sku": "Standard",
+        "region": "eastus",
+        "unit": "operation",
+        "unitPrice": 1.5e-8,
+        "currency": "USD",
+        "effectiveFrom": "2014-12-01T00:00:00Z",
+        "resourceCategory": "messaging",
+        "targetUnit": "operation",
+        "providerUnit": "1",
+        "unitScale": 1000000,
+        "sourceUrl": "https://prices.azure.com/api/retail/prices",
+        "retrievedAt": "2026-08-30T15:43:42.638Z",
+        "rawReference": "85f84482-123e-44a9-a2d5-cb53f2abe0f8"
+      },
+      {
+        "id": "azure-compute-appservice-p1mv4:0bb6b6d1-9456-5756-9797-a0fc64728d90",
+        "provider": "Azure",
+        "service": "Azure App Service",
+        "product": "Azure App Service Premium v4 Plan",
+        "sku": "P1mv4",
+        "region": "eastus",
+        "unit": "instance-hour",
+        "unitPrice": 0.278,
+        "currency": "USD",
+        "effectiveFrom": "2025-09-01T00:00:00Z",
+        "resourceCategory": "compute",
+        "targetUnit": "instance-hour",
+        "providerUnit": "1 Hour",
+        "unitScale": 1,
+        "sourceUrl": "https://prices.azure.com/api/retail/prices",
+        "retrievedAt": "2026-09-01T12:51:44.626Z",
+        "rawReference": "0bb6b6d1-9456-5756-9797-a0fc64728d90"
+      },
+      {
+        "id": "azure-database-cosmos-autoscale:11655217-740a-4f85-bf15-bbb5bd63101b",
+        "provider": "Azure",
+        "service": "Azure Cosmos DB",
+        "product": "Azure Cosmos DB autoscale",
+        "sku": "AP2",
+        "region": "eastus",
+        "unit": "database-hour",
+        "unitPrice": 0.16,
+        "currency": "USD",
+        "effectiveFrom": "2023-04-01T00:00:00Z",
+        "resourceCategory": "database",
+        "targetUnit": "database-hour",
+        "providerUnit": "1/Hour",
+        "unitScale": 1,
+        "sourceUrl": "https://prices.azure.com/api/retail/prices",
+        "retrievedAt": "2026-09-01T12:51:45.310Z",
+        "rawReference": "11655217-740a-4f85-bf15-bbb5bd63101b"
+      },
+      {
+        "id": "azure-storage-hot-lrs:272492b3-1c92-4a5f-bee9-52a8e10ca514",
+        "provider": "Azure",
+        "service": "Storage",
+        "product": "Blob Storage",
+        "sku": "Hot LRS",
+        "region": "eastus",
+        "unit": "GB-month",
+        "unitPrice": 0.0208,
+        "currency": "USD",
+        "effectiveFrom": "2017-02-03T00:00:00Z",
+        "resourceCategory": "storage",
+        "targetUnit": "GB-month",
+        "providerUnit": "1 GB/Month",
+        "unitScale": 1,
+        "sourceUrl": "https://prices.azure.com/api/retail/prices",
+        "retrievedAt": "2026-09-01T12:51:45.423Z",
+        "rawReference": "272492b3-1c92-4a5f-bee9-52a8e10ca514"
+      },
+      {
+        "id": "azure-storage-hot-lrs:272492b3-1c92-4a5f-bee9-52a8e10ca514",
+        "provider": "Azure",
+        "service": "Storage",
+        "product": "Blob Storage",
+        "sku": "Hot LRS",
+        "region": "eastus",
+        "unit": "GB-month",
+        "unitPrice": 0.019968,
+        "currency": "USD",
+        "effectiveFrom": "2017-02-03T00:00:00Z",
+        "resourceCategory": "storage",
+        "targetUnit": "GB-month",
+        "providerUnit": "1 GB/Month",
+        "unitScale": 1,
+        "sourceUrl": "https://prices.azure.com/api/retail/prices",
+        "retrievedAt": "2026-09-01T12:51:45.423Z",
+        "rawReference": "272492b3-1c92-4a5f-bee9-52a8e10ca514"
+      },
+      {
+        "id": "azure-storage-hot-lrs:272492b3-1c92-4a5f-bee9-52a8e10ca514",
+        "provider": "Azure",
+        "service": "Storage",
+        "product": "Blob Storage",
+        "sku": "Hot LRS",
+        "region": "eastus",
+        "unit": "GB-month",
+        "unitPrice": 0.019136,
+        "currency": "USD",
+        "effectiveFrom": "2017-02-03T00:00:00Z",
+        "resourceCategory": "storage",
+        "targetUnit": "GB-month",
+        "providerUnit": "1 GB/Month",
+        "unitScale": 1,
+        "sourceUrl": "https://prices.azure.com/api/retail/prices",
+        "retrievedAt": "2026-09-01T12:51:45.423Z",
+        "rawReference": "272492b3-1c92-4a5f-bee9-52a8e10ca514"
+      },
+      {
+        "id": "azure-networking-inter-region:48a72138-d041-55c5-8b83-45703d4b2aed",
+        "provider": "Azure",
+        "service": "Bandwidth",
+        "product": "Rtn Preference: MGN",
+        "sku": "Standard",
+        "region": "eastus",
+        "unit": "GB",
+        "unitPrice": 0.02,
+        "currency": "USD",
+        "effectiveFrom": "2018-02-01T00:00:00Z",
+        "resourceCategory": "networking",
+        "targetUnit": "GB",
+        "providerUnit": "1 GB",
+        "unitScale": 1,
+        "sourceUrl": "https://prices.azure.com/api/retail/prices",
+        "retrievedAt": "2026-09-01T12:51:45.539Z",
+        "rawReference": "48a72138-d041-55c5-8b83-45703d4b2aed"
+      },
+      {
+        "id": "azure-monitoring-basic-logs:e1e87d95-70e9-5f7b-b29d-f879cbdc3dc0",
+        "provider": "Azure",
+        "service": "Azure Monitor",
+        "product": "Azure Monitor",
+        "sku": "Basic Logs",
+        "region": "eastus",
+        "unit": "1K-events",
+        "unitPrice": 0.0005,
+        "currency": "USD",
+        "effectiveFrom": "2022-10-01T00:00:00Z",
+        "resourceCategory": "monitoring",
+        "targetUnit": "1K-events",
+        "providerUnit": "1 GB",
+        "unitScale": 1000,
+        "sourceUrl": "https://prices.azure.com/api/retail/prices",
+        "retrievedAt": "2026-09-01T12:51:45.663Z",
+        "rawReference": "e1e87d95-70e9-5f7b-b29d-f879cbdc3dc0"
+      },
+      {
+        "id": "azure-security-defender-servers:cf8a15c4-b0d9-4d15-9d0f-b4fba67f1516",
+        "provider": "Azure",
+        "service": "Microsoft Defender for Cloud",
+        "product": "Microsoft Defender for Servers",
+        "sku": "Standard v2",
+        "region": "eastus",
+        "unit": "protected-instance-hour",
+        "unitPrice": 0.02,
+        "currency": "USD",
+        "effectiveFrom": "2019-12-01T00:00:00Z",
+        "resourceCategory": "security",
+        "targetUnit": "protected-instance-hour",
+        "providerUnit": "1/Hour",
+        "unitScale": 1,
+        "sourceUrl": "https://prices.azure.com/api/retail/prices",
+        "retrievedAt": "2026-09-01T12:51:45.771Z",
+        "rawReference": "cf8a15c4-b0d9-4d15-9d0f-b4fba67f1516"
+      },
+      {
+        "id": "azure-messaging-servicebus-basic:3c5657c6-28c7-49f0-9456-9a165161954d",
+        "provider": "Azure",
+        "service": "Service Bus",
+        "product": "Service Bus",
+        "sku": "Basic",
+        "region": "eastus",
+        "unit": "operation",
+        "unitPrice": 5.0000000000000004e-8,
+        "currency": "USD",
+        "effectiveFrom": "2014-11-01T00:00:00Z",
+        "resourceCategory": "messaging",
+        "targetUnit": "operation",
+        "providerUnit": "1M",
+        "unitScale": 1000000,
+        "sourceUrl": "https://prices.azure.com/api/retail/prices",
+        "retrievedAt": "2026-09-01T12:51:45.882Z",
+        "rawReference": "3c5657c6-28c7-49f0-9456-9a165161954d"
+      },
+      {
+        "id": "azure-search-basic-unit:35bdd447-b4db-5e67-83cf-3836f95cc83e",
+        "provider": "Azure",
+        "service": "Azure Cognitive Search",
+        "product": "Azure AI Search",
+        "sku": "Basic CC",
+        "region": "eastus",
+        "unit": "search-unit-hour",
+        "unitPrice": 0.1111,
+        "currency": "USD",
+        "effectiveFrom": "2025-10-01T00:00:00Z",
+        "resourceCategory": "search",
+        "targetUnit": "search-unit-hour",
+        "providerUnit": "1 Hour",
+        "unitScale": 1,
+        "sourceUrl": "https://prices.azure.com/api/retail/prices",
+        "retrievedAt": "2026-09-01T12:51:45.989Z",
+        "rawReference": "35bdd447-b4db-5e67-83cf-3836f95cc83e"
+      }
+    ],
+    "documents": [
+      {
+        "id": "azure-sla-guidance",
+        "dimension": "availability",
+        "metric": "availability.slaPolicy",
+        "value": "configuration-specific",
+        "sourceType": "official-sla",
+        "sourceName": "Azure service-level agreement guidance",
+        "sourceUrl": "https://learn.microsoft.com/en-us/azure/reliability/concept-service-level-agreements",
+        "retrievedAt": "2026-09-01T12:51:46.739Z",
+        "confidence": 95
+      },
+      {
+        "id": "azure-security-guidance",
+        "dimension": "security",
+        "metric": "security.platformCapabilities",
+        "value": "documented",
+        "sourceType": "official-documentation",
+        "sourceName": "Azure security fundamentals",
+        "sourceUrl": "https://learn.microsoft.com/en-us/azure/security/fundamentals/overview",
+        "retrievedAt": "2026-09-01T12:51:47.310Z",
+        "confidence": 90
+      }
+    ],
+    "failures": []
+  },
+  "scoring": {
+    "defaultWeights": {
+      "architectureFit": 20,
+      "performance": 15,
+      "security": 12,
+      "scalability": 10,
+      "costEfficiency": 10,
+      "availability": 8,
+      "aiFit": 8,
+      "complexity": 6,
+      "maintainability": 6,
+      "operationalFit": 5
+    },
+    "modelWeights": {
+      "workloadQuality": 0.35,
+      "latency": 0.2,
+      "costEfficiency": 0.2,
+      "reasoning": 0.1,
+      "security": 0.1,
+      "reliability": 0.05
+    },
+    "microservicesFit": {
+      "explicitRequirementCap": 40,
+      "keywords": [
+        "microservice",
+        "container",
+        "kubernetes",
+        "aks",
+        "eks",
+        "gke"
+      ]
+    },
+    "derivation": {
+      "complexity": {
+        "serviceCountMaximum": 16,
+        "integrationPointsMaximum": 20,
+        "deploymentUnitsMaximum": 12,
+        "stateAndDependencyMaximum": 20,
+        "factorWeight": 0.25
+      },
+      "maintainability": {
+        "complexityWeight": 0.55,
+        "automationWeight": 0.2,
+        "observabilityWeight": 0.2,
+        "runbookWeight": 0.15,
+        "baselineAdjustment": -35
+      },
+      "model": {
+        "latencyTargetMs": 100,
+        "latencyMsPerPenaltyPoint": 50,
+        "availabilityBaselinePercent": 99,
+        "availabilityPointsPerPercent": 100,
+        "errorRatePenalty": 10
+      }
+    },
+    "confidence": {
+      "sourceReliability": {
+        "official-api": 100,
+        "official-documentation": 95,
+        "official-sla": 100,
+        "independent-benchmark": 90,
+        "internal-benchmark": 80,
+        "expert-rule": 60
+      },
+      "factors": {
+        "sourceReliability": 0.3,
+        "freshness": 0.2,
+        "measurementQuality": 0.3,
+        "applicability": 0.2
+      },
+      "staleAfterDays": 90,
+      "minimumFreshness": 20,
+      "assumptionPenalty": 6,
+      "evidenceWeight": 0.55,
+      "requirementWeight": 0.3,
+      "stabilityWeight": 0.15
+    }
+  },
+  "architectures": [
+    {
+      "id": "event-ml",
+      "name": "Event-Driven ML",
+      "pattern": "Real-time predictive scoring",
+      "description": "Streaming events, low-latency feature access, ML inference, and deterministic rules.",
+      "components": [
+        "Channels",
+        "API Gateway",
+        "Event Stream",
+        "Feature Store",
+        "ML Inference",
+        "Rules Engine",
+        "Operational DB",
+        "Monitoring"
+      ],
+      "strengths": [
+        "Lowest prediction latency",
+        "High streaming throughput",
+        "No LLM dependency"
+      ],
+      "weaknesses": [
+        "Requires model operations capability",
+        "Feature pipelines add engineering effort"
+      ],
+      "capabilities": {
+        "ai": true,
+        "genAI": false,
+        "multimodal": false,
+        "toolCalling": false,
+        "humanReview": true,
+        "realTime": true,
+        "streaming": true,
+        "sourceCitations": false,
+        "predictiveScoring": true,
+        "documentProcessing": false,
+        "knowledgeRetrieval": false,
+        "workflowOrchestration": false
+      },
+      "observations": {
+        "pricing": {
+          "currency": "USD",
+          "region": "provider-default",
+          "monthlyUsageProfile": "catalog-reference-workload",
+          "components": [
+            {
+              "category": "Compute",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:event-ml:compute",
+              "unitPrice": 2176,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Data",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:event-ml:data",
+              "unitPrice": 1292,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "AI",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:event-ml:ai",
+              "unitPrice": 816,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Integration",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:event-ml:integration",
+              "unitPrice": 680,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Security",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:event-ml:security",
+              "unitPrice": 340,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Monitoring and networking",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:event-ml:monitoring-and-networking",
+              "unitPrice": 1496,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            }
+          ],
+          "requestUnitCost": 0.000014,
+          "retrievedAt": "2026-08-29T00:00:00Z"
+        },
+        "benchmark": {
+          "latencyFormula": {
+            "components": [
+              {
+                "name": "API gateway",
+                "p95Ms": 8
+              },
+              {
+                "name": "Event stream hop",
+                "p95Ms": 12
+              },
+              {
+                "name": "Feature lookup",
+                "p95Ms": 6
+              },
+              {
+                "name": "ML scoring",
+                "p95Ms": 12
+              }
+            ],
+            "modelMultiplier": 0,
+            "sourceType": "expert-rule",
+            "sourceUrl": "urn:decision-catalog:baseline:latency-formula:event-ml",
+            "measuredAt": "2026-08-27T00:00:00Z"
+          },
+          "sustainableRequestsPerSecond": 12000,
+          "errorRatePercent": 0.15,
+          "testConfiguration": {
+            "concurrency": 100,
+            "requests": 10000,
+            "region": "East US"
+          },
+          "measuredAt": "2026-08-27T00:00:00Z",
+          "sourceUrl": "urn:decision-catalog:baseline:architecture:event-ml",
+          "sourceType": "expert-rule"
+        },
+        "capacity": {
+          "documentedRequestsPerSecond": 12000,
+          "testedRequestsPerSecond": 12000,
+          "sourceUrl": "urn:decision-catalog:baseline:capacity:event-ml",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "availability": {
+          "slaPercent": 99.99,
+          "sourceUrl": "urn:decision-catalog:baseline:availability:event-ml",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "Provider security capability documentation",
+              "sourceUrl": "https://learn.microsoft.com/azure/security/fundamentals/overview",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        },
+        "operations": {
+          "serviceCount": 8,
+          "integrationPoints": 7,
+          "deploymentUnits": 4,
+          "statefulComponents": 3,
+          "operationalDependencies": 8,
+          "deploymentAutomationPercent": 91,
+          "observabilityCoveragePercent": 91,
+          "runbookCoveragePercent": 91
+        }
+      },
+      "metadata": {
+        "version": "2026.08.29",
+        "lastUpdated": "2026-08-29T00:00:00Z",
+        "status": "active"
+      }
+    },
+    {
+      "id": "hybrid",
+      "name": "Hybrid ML + Rules",
+      "pattern": "Predictive automation with human control",
+      "description": "Combines ML scoring, business rules, workflow orchestration, and optional GenAI enrichment.",
+      "components": [
+        "Users",
+        "API Gateway",
+        "Workflow Engine",
+        "Rules Engine",
+        "ML Service",
+        "AI Enrichment",
+        "Operational DB",
+        "Object Storage",
+        "Event Stream"
+      ],
+      "strengths": [
+        "Balances automation and control",
+        "Supports human approval",
+        "Graceful AI fallback"
+      ],
+      "weaknesses": [
+        "More integration points",
+        "Requires coordinated model and rules governance"
+      ],
+      "capabilities": {
+        "ai": true,
+        "genAI": true,
+        "multimodal": true,
+        "toolCalling": false,
+        "humanReview": true,
+        "realTime": true,
+        "streaming": true,
+        "sourceCitations": false,
+        "predictiveScoring": true,
+        "documentProcessing": true,
+        "knowledgeRetrieval": false,
+        "workflowOrchestration": true
+      },
+      "observations": {
+        "pricing": {
+          "currency": "USD",
+          "region": "provider-default",
+          "monthlyUsageProfile": "catalog-reference-workload",
+          "components": [
+            {
+              "category": "Compute",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:hybrid:compute",
+              "unitPrice": 2944,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Data",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:hybrid:data",
+              "unitPrice": 1748,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "AI",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:hybrid:ai",
+              "unitPrice": 1104,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Integration",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:hybrid:integration",
+              "unitPrice": 920,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Security",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:hybrid:security",
+              "unitPrice": 460,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Monitoring and networking",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:hybrid:monitoring-and-networking",
+              "unitPrice": 2024,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            }
+          ],
+          "requestUnitCost": 0.000038,
+          "retrievedAt": "2026-08-29T00:00:00Z"
+        },
+        "benchmark": {
+          "latencyFormula": {
+            "components": [
+              {
+                "name": "API gateway",
+                "p95Ms": 10
+              },
+              {
+                "name": "Workflow engine",
+                "p95Ms": 20
+              },
+              {
+                "name": "Rules engine",
+                "p95Ms": 10
+              },
+              {
+                "name": "ML inference",
+                "p95Ms": 40
+              },
+              {
+                "name": "Data access",
+                "p95Ms": 15
+              }
+            ],
+            "modelMultiplier": 1,
+            "sourceType": "expert-rule",
+            "sourceUrl": "urn:decision-catalog:baseline:latency-formula:hybrid",
+            "measuredAt": "2026-08-27T00:00:00Z"
+          },
+          "sustainableRequestsPerSecond": 6000,
+          "errorRatePercent": 0.15,
+          "testConfiguration": {
+            "concurrency": 100,
+            "requests": 10000,
+            "region": "East US"
+          },
+          "measuredAt": "2026-08-27T00:00:00Z",
+          "sourceUrl": "urn:decision-catalog:baseline:architecture:hybrid",
+          "sourceType": "expert-rule"
+        },
+        "capacity": {
+          "documentedRequestsPerSecond": 6000,
+          "testedRequestsPerSecond": 6000,
+          "sourceUrl": "urn:decision-catalog:baseline:capacity:hybrid",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "availability": {
+          "slaPercent": 99.99,
+          "sourceUrl": "urn:decision-catalog:baseline:availability:hybrid",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "Provider security capability documentation",
+              "sourceUrl": "https://learn.microsoft.com/azure/security/fundamentals/overview",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        },
+        "operations": {
+          "serviceCount": 9,
+          "integrationPoints": 8,
+          "deploymentUnits": 5,
+          "statefulComponents": 3,
+          "operationalDependencies": 9,
+          "deploymentAutomationPercent": 88,
+          "observabilityCoveragePercent": 88,
+          "runbookCoveragePercent": 88
+        }
+      },
+      "metadata": {
+        "version": "2026.08.29",
+        "lastUpdated": "2026-08-29T00:00:00Z",
+        "status": "active"
+      }
+    },
+    {
+      "id": "microservices-ai",
+      "name": "Agentic Orchestration on Microservices",
+      "pattern": "Independently scalable agentic domain services",
+      "description": "Use this scalable form of agentic orchestration when autonomous agents, governed tools, APIs, events, workflows, and data must run behind independently deployable service boundaries.",
+      "components": [
+        "Users",
+        "API Gateway",
+        "Microservices Runtime",
+        "Service Mesh",
+        "Container Registry",
+        "Autoscaling",
+        "Event Stream",
+        "Workflow Engine",
+        "Agent Orchestrator",
+        "Tool Gateway",
+        "Document Processing",
+        "AI Model",
+        "Search Index",
+        "Human Review",
+        "Operational DB",
+        "Cache",
+        "Object Storage",
+        "Observability"
+      ],
+      "strengths": [
+        "Independent deployment and scaling",
+        "Strong workload isolation",
+        "Supports mixed transactional and AI workloads",
+        "Scales agent orchestration and governed tool execution across domain services"
+      ],
+      "weaknesses": [
+        "Higher platform and operations cost",
+        "Requires mature DevSecOps and service ownership"
+      ],
+      "capabilities": {
+        "ai": true,
+        "genAI": true,
+        "multimodal": true,
+        "toolCalling": true,
+        "humanReview": true,
+        "realTime": true,
+        "streaming": true,
+        "sourceCitations": true,
+        "predictiveScoring": false,
+        "documentProcessing": true,
+        "knowledgeRetrieval": true,
+        "workflowOrchestration": true
+      },
+      "observations": {
+        "pricing": {
+          "currency": "USD",
+          "region": "provider-default",
+          "monthlyUsageProfile": "catalog-reference-workload",
+          "components": [
+            {
+              "category": "Compute",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:microservices-ai:compute",
+              "unitPrice": 4544,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Data",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:microservices-ai:data",
+              "unitPrice": 2698,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "AI",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:microservices-ai:ai",
+              "unitPrice": 1704,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Integration",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:microservices-ai:integration",
+              "unitPrice": 1420,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Security",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:microservices-ai:security",
+              "unitPrice": 710,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Monitoring and networking",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:microservices-ai:monitoring-and-networking",
+              "unitPrice": 3124,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            }
+          ],
+          "requestUnitCost": 0.000075,
+          "retrievedAt": "2026-08-29T00:00:00Z"
+        },
+        "benchmark": {
+          "latencyFormula": {
+            "components": [
+              {
+                "name": "API gateway",
+                "p95Ms": 15
+              },
+              {
+                "name": "Service mesh hop",
+                "p95Ms": 25
+              },
+              {
+                "name": "Inter-service calls",
+                "p95Ms": 40
+              },
+              {
+                "name": "Data access",
+                "p95Ms": 20
+              }
+            ],
+            "modelMultiplier": 1,
+            "sourceType": "expert-rule",
+            "sourceUrl": "urn:decision-catalog:baseline:latency-formula:microservices-ai",
+            "measuredAt": "2026-08-27T00:00:00Z"
+          },
+          "sustainableRequestsPerSecond": 4000,
+          "errorRatePercent": 0.15,
+          "testConfiguration": {
+            "concurrency": 100,
+            "requests": 10000,
+            "region": "East US"
+          },
+          "measuredAt": "2026-08-27T00:00:00Z",
+          "sourceUrl": "urn:decision-catalog:baseline:architecture:microservices-ai",
+          "sourceType": "expert-rule"
+        },
+        "capacity": {
+          "documentedRequestsPerSecond": 4000,
+          "testedRequestsPerSecond": 4000,
+          "sourceUrl": "urn:decision-catalog:baseline:capacity:microservices-ai",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "availability": {
+          "slaPercent": 99.99,
+          "sourceUrl": "urn:decision-catalog:baseline:availability:microservices-ai",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "Provider security capability documentation",
+              "sourceUrl": "https://learn.microsoft.com/azure/security/fundamentals/overview",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        },
+        "operations": {
+          "serviceCount": 16,
+          "integrationPoints": 15,
+          "deploymentUnits": 8,
+          "statefulComponents": 5,
+          "operationalDependencies": 16,
+          "deploymentAutomationPercent": 84,
+          "observabilityCoveragePercent": 84,
+          "runbookCoveragePercent": 84
+        }
+      },
+      "metadata": {
+        "version": "2026.08.29",
+        "lastUpdated": "2026-08-29T00:00:00Z",
+        "status": "active"
+      }
+    },
+    {
+      "id": "workflow-ai",
+      "name": "Workflow + AI",
+      "pattern": "Structured intelligent automation",
+      "description": "A durable workflow coordinates document processing, AI extraction, rules, and approval queues.",
+      "components": [
+        "Users",
+        "API Gateway",
+        "Workflow Engine",
+        "Document Processing",
+        "AI Model",
+        "Human Review",
+        "Operational DB",
+        "Object Storage"
+      ],
+      "strengths": [
+        "Strong process traceability",
+        "Good document workflow fit",
+        "Built-in human review"
+      ],
+      "weaknesses": [
+        "Workflow state requires governance",
+        "Moderate AI inference cost"
+      ],
+      "capabilities": {
+        "ai": true,
+        "genAI": true,
+        "multimodal": true,
+        "toolCalling": false,
+        "humanReview": true,
+        "realTime": false,
+        "streaming": false,
+        "sourceCitations": false,
+        "predictiveScoring": false,
+        "documentProcessing": true,
+        "knowledgeRetrieval": false,
+        "workflowOrchestration": true
+      },
+      "observations": {
+        "pricing": {
+          "currency": "USD",
+          "region": "provider-default",
+          "monthlyUsageProfile": "catalog-reference-workload",
+          "components": [
+            {
+              "category": "Compute",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:workflow-ai:compute",
+              "unitPrice": 2272,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Data",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:workflow-ai:data",
+              "unitPrice": 1349,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "AI",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:workflow-ai:ai",
+              "unitPrice": 852,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Integration",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:workflow-ai:integration",
+              "unitPrice": 710,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Security",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:workflow-ai:security",
+              "unitPrice": 355,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Monitoring and networking",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:workflow-ai:monitoring-and-networking",
+              "unitPrice": 1562,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            }
+          ],
+          "requestUnitCost": 0.00011,
+          "retrievedAt": "2026-08-29T00:00:00Z"
+        },
+        "benchmark": {
+          "latencyFormula": {
+            "components": [
+              {
+                "name": "API gateway",
+                "p95Ms": 10
+              },
+              {
+                "name": "Workflow orchestration",
+                "p95Ms": 60
+              },
+              {
+                "name": "Connector calls",
+                "p95Ms": 45
+              },
+              {
+                "name": "Data access",
+                "p95Ms": 20
+              }
+            ],
+            "modelMultiplier": 1,
+            "sourceType": "expert-rule",
+            "sourceUrl": "urn:decision-catalog:baseline:latency-formula:workflow-ai",
+            "measuredAt": "2026-08-27T00:00:00Z"
+          },
+          "sustainableRequestsPerSecond": 1200,
+          "errorRatePercent": 0.15,
+          "testConfiguration": {
+            "concurrency": 100,
+            "requests": 10000,
+            "region": "East US"
+          },
+          "measuredAt": "2026-08-27T00:00:00Z",
+          "sourceUrl": "urn:decision-catalog:baseline:architecture:workflow-ai",
+          "sourceType": "expert-rule"
+        },
+        "capacity": {
+          "documentedRequestsPerSecond": 1200,
+          "testedRequestsPerSecond": 1200,
+          "sourceUrl": "urn:decision-catalog:baseline:capacity:workflow-ai",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "availability": {
+          "slaPercent": 99.95,
+          "sourceUrl": "urn:decision-catalog:baseline:availability:workflow-ai",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": false,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "security.controls",
+              "value": 6,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "Provider security capability documentation",
+              "sourceUrl": "https://learn.microsoft.com/azure/security/fundamentals/overview",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        },
+        "operations": {
+          "serviceCount": 8,
+          "integrationPoints": 7,
+          "deploymentUnits": 4,
+          "statefulComponents": 2,
+          "operationalDependencies": 8,
+          "deploymentAutomationPercent": 92,
+          "observabilityCoveragePercent": 92,
+          "runbookCoveragePercent": 92
+        }
+      },
+      "metadata": {
+        "version": "2026.08.29",
+        "lastUpdated": "2026-08-29T00:00:00Z",
+        "status": "active"
+      }
+    },
+    {
+      "id": "rag",
+      "name": "Retrieval-Augmented Generation",
+      "pattern": "Grounded knowledge assistant",
+      "description": "Retrieval, reranking, and generation over governed enterprise knowledge.",
+      "components": [
+        "Users",
+        "API Gateway",
+        "Application",
+        "Search Index",
+        "Embedding Model",
+        "LLM",
+        "Document Store",
+        "Monitoring"
+      ],
+      "strengths": [
+        "Grounded enterprise answers",
+        "Source citation support"
+      ],
+      "weaknesses": [
+        "Index freshness affects quality",
+        "Not suitable for low-latency decisions"
+      ],
+      "capabilities": {
+        "ai": true,
+        "genAI": true,
+        "multimodal": true,
+        "toolCalling": false,
+        "humanReview": true,
+        "realTime": false,
+        "streaming": false,
+        "sourceCitations": true,
+        "predictiveScoring": false,
+        "documentProcessing": true,
+        "knowledgeRetrieval": true,
+        "workflowOrchestration": false
+      },
+      "observations": {
+        "pricing": {
+          "currency": "USD",
+          "region": "provider-default",
+          "monthlyUsageProfile": "catalog-reference-workload",
+          "components": [
+            {
+              "category": "Compute",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:rag:compute",
+              "unitPrice": 2688,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Data",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:rag:data",
+              "unitPrice": 1596,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "AI",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:rag:ai",
+              "unitPrice": 1008,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Integration",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:rag:integration",
+              "unitPrice": 840,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Security",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:rag:security",
+              "unitPrice": 420,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Monitoring and networking",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:rag:monitoring-and-networking",
+              "unitPrice": 1848,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            }
+          ],
+          "requestUnitCost": 0,
+          "retrievedAt": "2026-08-29T00:00:00Z"
+        },
+        "benchmark": {
+          "latencyFormula": {
+            "components": [
+              {
+                "name": "API gateway",
+                "p95Ms": 10
+              },
+              {
+                "name": "Vector search",
+                "p95Ms": 150
+              },
+              {
+                "name": "Rerank",
+                "p95Ms": 50
+              },
+              {
+                "name": "Orchestration",
+                "p95Ms": 20
+              },
+              {
+                "name": "Data access",
+                "p95Ms": 15
+              }
+            ],
+            "modelMultiplier": 1,
+            "sourceType": "expert-rule",
+            "sourceUrl": "urn:decision-catalog:baseline:latency-formula:rag",
+            "measuredAt": "2026-08-27T00:00:00Z"
+          },
+          "sustainableRequestsPerSecond": 450,
+          "errorRatePercent": 0.15,
+          "testConfiguration": {
+            "concurrency": 100,
+            "requests": 10000,
+            "region": "East US"
+          },
+          "measuredAt": "2026-08-27T00:00:00Z",
+          "sourceUrl": "urn:decision-catalog:baseline:architecture:rag",
+          "sourceType": "expert-rule"
+        },
+        "capacity": {
+          "documentedRequestsPerSecond": 450,
+          "testedRequestsPerSecond": 450,
+          "sourceUrl": "urn:decision-catalog:baseline:capacity:rag",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "availability": {
+          "slaPercent": 99.9,
+          "sourceUrl": "urn:decision-catalog:baseline:availability:rag",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": false,
+            "rbac": false,
+            "managedIdentity": false,
+            "auditLogging": true,
+            "secretManagement": false
+          },
+          "evidence": [
+            {
+              "metric": "security.controls",
+              "value": 3,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "Provider security capability documentation",
+              "sourceUrl": "https://learn.microsoft.com/azure/security/fundamentals/overview",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        },
+        "operations": {
+          "serviceCount": 8,
+          "integrationPoints": 7,
+          "deploymentUnits": 4,
+          "statefulComponents": 2,
+          "operationalDependencies": 8,
+          "deploymentAutomationPercent": 76,
+          "observabilityCoveragePercent": 76,
+          "runbookCoveragePercent": 76
+        }
+      },
+      "metadata": {
+        "version": "2026.08.29",
+        "lastUpdated": "2026-08-29T00:00:00Z",
+        "status": "active"
+      }
+    },
+    {
+      "id": "agentic",
+      "name": "Focused Agentic Orchestration",
+      "pattern": "Stateful planning and tool-based execution",
+      "description": "Use this focused agentic pattern when one stateful orchestrator plans multi-step work, invokes governed tools, and requests approval without independently scalable domain-service boundaries.",
+      "components": [
+        "Users",
+        "API Gateway",
+        "Agent Orchestrator",
+        "LLM",
+        "Tool Gateway",
+        "State Store",
+        "Human Approval",
+        "Observability"
+      ],
+      "strengths": [
+        "Handles dynamic multi-step work",
+        "Flexible tool integration with a simpler topology"
+      ],
+      "weaknesses": [
+        "Highest cost and latency",
+        "Requires strong guardrails and tracing"
+      ],
+      "capabilities": {
+        "ai": true,
+        "genAI": true,
+        "multimodal": true,
+        "toolCalling": true,
+        "humanReview": true,
+        "realTime": false,
+        "streaming": false,
+        "sourceCitations": false,
+        "predictiveScoring": false,
+        "documentProcessing": true,
+        "knowledgeRetrieval": true,
+        "workflowOrchestration": true
+      },
+      "observations": {
+        "pricing": {
+          "currency": "USD",
+          "region": "provider-default",
+          "monthlyUsageProfile": "catalog-reference-workload",
+          "components": [
+            {
+              "category": "Compute",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:agentic:compute",
+              "unitPrice": 4096,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Data",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:agentic:data",
+              "unitPrice": 2432,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "AI",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:agentic:ai",
+              "unitPrice": 1536,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Integration",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:agentic:integration",
+              "unitPrice": 1280,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Security",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:agentic:security",
+              "unitPrice": 640,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Monitoring and networking",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:agentic:monitoring-and-networking",
+              "unitPrice": 2816,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            }
+          ],
+          "requestUnitCost": 0,
+          "retrievedAt": "2026-08-29T00:00:00Z"
+        },
+        "benchmark": {
+          "latencyFormula": {
+            "components": [
+              {
+                "name": "API gateway",
+                "p95Ms": 10
+              },
+              {
+                "name": "Planning step",
+                "p95Ms": 250
+              },
+              {
+                "name": "Tool execution",
+                "p95Ms": 500
+              },
+              {
+                "name": "Memory read/write",
+                "p95Ms": 100
+              },
+              {
+                "name": "Agent orchestration",
+                "p95Ms": 40
+              }
+            ],
+            "modelMultiplier": 1,
+            "sourceType": "expert-rule",
+            "sourceUrl": "urn:decision-catalog:baseline:latency-formula:agentic",
+            "measuredAt": "2026-08-27T00:00:00Z"
+          },
+          "sustainableRequestsPerSecond": 180,
+          "errorRatePercent": 0.15,
+          "testConfiguration": {
+            "concurrency": 100,
+            "requests": 10000,
+            "region": "East US"
+          },
+          "measuredAt": "2026-08-27T00:00:00Z",
+          "sourceUrl": "urn:decision-catalog:baseline:architecture:agentic",
+          "sourceType": "expert-rule"
+        },
+        "capacity": {
+          "documentedRequestsPerSecond": 180,
+          "testedRequestsPerSecond": 180,
+          "sourceUrl": "urn:decision-catalog:baseline:capacity:agentic",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "availability": {
+          "slaPercent": 99.9,
+          "sourceUrl": "urn:decision-catalog:baseline:availability:agentic",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": false,
+            "rbac": true,
+            "managedIdentity": false,
+            "auditLogging": true,
+            "secretManagement": false
+          },
+          "evidence": [
+            {
+              "metric": "security.controls",
+              "value": 4,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "Provider security capability documentation",
+              "sourceUrl": "https://learn.microsoft.com/azure/security/fundamentals/overview",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        },
+        "operations": {
+          "serviceCount": 8,
+          "integrationPoints": 7,
+          "deploymentUnits": 4,
+          "statefulComponents": 1,
+          "operationalDependencies": 8,
+          "deploymentAutomationPercent": 65,
+          "observabilityCoveragePercent": 65,
+          "runbookCoveragePercent": 65
+        }
+      },
+      "metadata": {
+        "version": "2026.08.29",
+        "lastUpdated": "2026-08-29T00:00:00Z",
+        "status": "active"
+      }
+    },
+    {
+      "id": "traditional",
+      "name": "Traditional Service Architecture",
+      "pattern": "Rules-based transactional processing",
+      "description": "Stateless services, relational persistence, queues, and deterministic business rules.",
+      "components": [
+        "Users",
+        "Load Balancer",
+        "Application Services",
+        "Rules Engine",
+        "Message Queue",
+        "Relational DB",
+        "Cache",
+        "Monitoring"
+      ],
+      "strengths": [
+        "Lowest operational complexity",
+        "Predictable behavior and cost"
+      ],
+      "weaknesses": [
+        "Limited unstructured reasoning",
+        "Advanced prediction requires an ML extension"
+      ],
+      "capabilities": {
+        "ai": false,
+        "genAI": false,
+        "multimodal": false,
+        "toolCalling": false,
+        "humanReview": true,
+        "realTime": true,
+        "streaming": false,
+        "sourceCitations": false,
+        "predictiveScoring": false,
+        "documentProcessing": false,
+        "knowledgeRetrieval": false,
+        "workflowOrchestration": true
+      },
+      "observations": {
+        "pricing": {
+          "currency": "USD",
+          "region": "provider-default",
+          "monthlyUsageProfile": "catalog-reference-workload",
+          "components": [
+            {
+              "category": "Compute",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:traditional:compute",
+              "unitPrice": 1248,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Data",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:traditional:data",
+              "unitPrice": 741,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "AI",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:traditional:ai",
+              "unitPrice": 117,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Integration",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:traditional:integration",
+              "unitPrice": 390,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Security",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:traditional:security",
+              "unitPrice": 195,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            },
+            {
+              "category": "Monitoring and networking",
+              "sourceUrl": "urn:decision-catalog:baseline:pricing:traditional:monitoring-and-networking",
+              "unitPrice": 1209,
+              "monthlyQuantity": 1,
+              "unit": "reference-workload-month",
+              "sourceType": "expert-rule"
+            }
+          ],
+          "requestUnitCost": 0.000009,
+          "retrievedAt": "2026-08-29T00:00:00Z"
+        },
+        "benchmark": {
+          "latencyFormula": {
+            "components": [
+              {
+                "name": "API gateway",
+                "p95Ms": 10
+              },
+              {
+                "name": "Application service",
+                "p95Ms": 35
+              },
+              {
+                "name": "Database query",
+                "p95Ms": 30
+              },
+              {
+                "name": "Cache lookup",
+                "p95Ms": 5
+              }
+            ],
+            "modelMultiplier": 0,
+            "sourceType": "expert-rule",
+            "sourceUrl": "urn:decision-catalog:baseline:latency-formula:traditional",
+            "measuredAt": "2026-08-27T00:00:00Z"
+          },
+          "sustainableRequestsPerSecond": 3500,
+          "errorRatePercent": 0.15,
+          "testConfiguration": {
+            "concurrency": 100,
+            "requests": 10000,
+            "region": "East US"
+          },
+          "measuredAt": "2026-08-27T00:00:00Z",
+          "sourceUrl": "urn:decision-catalog:baseline:architecture:traditional",
+          "sourceType": "expert-rule"
+        },
+        "capacity": {
+          "documentedRequestsPerSecond": 3500,
+          "testedRequestsPerSecond": 3500,
+          "sourceUrl": "urn:decision-catalog:baseline:capacity:traditional",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "availability": {
+          "slaPercent": 99.95,
+          "sourceUrl": "urn:decision-catalog:baseline:availability:traditional",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": false,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "security.controls",
+              "value": 6,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "Provider security capability documentation",
+              "sourceUrl": "https://learn.microsoft.com/azure/security/fundamentals/overview",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        },
+        "operations": {
+          "serviceCount": 8,
+          "integrationPoints": 7,
+          "deploymentUnits": 4,
+          "statefulComponents": 3,
+          "operationalDependencies": 8,
+          "deploymentAutomationPercent": 90,
+          "observabilityCoveragePercent": 90,
+          "runbookCoveragePercent": 90
+        }
+      },
+      "metadata": {
+        "version": "2026.08.29",
+        "lastUpdated": "2026-08-29T00:00:00Z",
+        "status": "active"
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "azure-gpt-5.4-mini",
+      "name": "GPT-5.4 mini",
+      "provider": "OpenAI",
+      "hostingProviders": [
+        "Azure"
+      ],
+      "capabilities": {
+        "text": true,
+        "image": true,
+        "audio": false,
+        "video": false,
+        "toolCalling": true,
+        "structuredOutput": true,
+        "contextWindow": 400000,
+        "maxOutputTokens": 128000
+      },
+      "pricing": {
+        "inputPer1M": 0.75,
+        "cachedInputPer1M": 0.08,
+        "outputPer1M": 4.5,
+        "currency": "USD",
+        "effectiveDate": "2026-08-28",
+        "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/"
+      },
+      "observations": {
+        "qualityBenchmarks": [
+          {
+            "task": "reasoning",
+            "benchmark": "reasoning-catalog-baseline",
+            "rawScore": 0.88,
+            "normalizedScore": 88,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.4-mini",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "extraction",
+            "benchmark": "extraction-catalog-baseline",
+            "rawScore": 0.91,
+            "normalizedScore": 91,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.4-mini",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "summarization",
+            "benchmark": "summarization-catalog-baseline",
+            "rawScore": 0.9,
+            "normalizedScore": 90,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.4-mini",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "rag",
+            "benchmark": "rag-catalog-baseline",
+            "rawScore": 0.89,
+            "normalizedScore": 89,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.4-mini",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "agentic",
+            "benchmark": "agentic-catalog-baseline",
+            "rawScore": 0.88,
+            "normalizedScore": 88,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.4-mini",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          }
+        ],
+        "latency": {
+          "p50Ms": 360,
+          "p95Ms": 600,
+          "ttftMs": 600,
+          "outputTokensPerSecond": 180,
+          "benchmark": "catalog-model-latency-baseline",
+          "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.4-mini",
+          "measuredAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "reliability": {
+          "availabilityPercent": 99.9,
+          "errorRatePercent": 0,
+          "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+          "observedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "model.security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "OpenAI model hosting security documentation",
+              "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "metric": "model.pricing",
+          "value": "0.75/4.5",
+          "unit": "USD per 1M tokens",
+          "sourceType": "official-documentation",
+          "sourceName": "OpenAI model pricing",
+          "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "confidence": 95
+        }
+      ]
+    },
+    {
+      "id": "azure-gpt-5.4-nano",
+      "name": "GPT-5.4 nano",
+      "provider": "OpenAI",
+      "hostingProviders": [
+        "Azure"
+      ],
+      "capabilities": {
+        "text": true,
+        "image": true,
+        "audio": false,
+        "video": false,
+        "toolCalling": true,
+        "structuredOutput": true,
+        "contextWindow": 400000,
+        "maxOutputTokens": 128000
+      },
+      "pricing": {
+        "inputPer1M": 0.2,
+        "cachedInputPer1M": 0.02,
+        "outputPer1M": 1.25,
+        "currency": "USD",
+        "effectiveDate": "2026-08-28",
+        "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/"
+      },
+      "observations": {
+        "qualityBenchmarks": [
+          {
+            "task": "reasoning",
+            "benchmark": "reasoning-catalog-baseline",
+            "rawScore": 0.74,
+            "normalizedScore": 74,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.4-nano",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "extraction",
+            "benchmark": "extraction-catalog-baseline",
+            "rawScore": 0.86,
+            "normalizedScore": 86,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.4-nano",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "summarization",
+            "benchmark": "summarization-catalog-baseline",
+            "rawScore": 0.82,
+            "normalizedScore": 82,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.4-nano",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "rag",
+            "benchmark": "rag-catalog-baseline",
+            "rawScore": 0.8,
+            "normalizedScore": 80,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.4-nano",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "agentic",
+            "benchmark": "agentic-catalog-baseline",
+            "rawScore": 0.76,
+            "normalizedScore": 76,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.4-nano",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          }
+        ],
+        "latency": {
+          "p50Ms": 150,
+          "p95Ms": 250,
+          "ttftMs": 250,
+          "outputTokensPerSecond": 320,
+          "benchmark": "catalog-model-latency-baseline",
+          "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.4-nano",
+          "measuredAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "reliability": {
+          "availabilityPercent": 99.9,
+          "errorRatePercent": 0,
+          "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+          "observedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "model.security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "OpenAI model hosting security documentation",
+              "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "metric": "model.pricing",
+          "value": "0.2/1.25",
+          "unit": "USD per 1M tokens",
+          "sourceType": "official-documentation",
+          "sourceName": "OpenAI model pricing",
+          "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "confidence": 95
+        }
+      ]
+    },
+    {
+      "id": "aws-nova-pro",
+      "name": "Amazon Nova Pro",
+      "provider": "Amazon",
+      "hostingProviders": [
+        "AWS"
+      ],
+      "capabilities": {
+        "text": true,
+        "image": true,
+        "audio": false,
+        "video": true,
+        "toolCalling": true,
+        "structuredOutput": true,
+        "contextWindow": 300000
+      },
+      "pricing": {
+        "inputPer1M": 0.8,
+        "outputPer1M": 3.2,
+        "currency": "USD",
+        "effectiveDate": "2026-08-28",
+        "sourceUrl": "https://aws.amazon.com/bedrock/pricing/"
+      },
+      "observations": {
+        "qualityBenchmarks": [
+          {
+            "task": "reasoning",
+            "benchmark": "reasoning-catalog-baseline",
+            "rawScore": 0.84,
+            "normalizedScore": 84,
+            "sourceUrl": "urn:decision-catalog:baseline:model:aws-nova-pro",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "extraction",
+            "benchmark": "extraction-catalog-baseline",
+            "rawScore": 0.84,
+            "normalizedScore": 84,
+            "sourceUrl": "urn:decision-catalog:baseline:model:aws-nova-pro",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "summarization",
+            "benchmark": "summarization-catalog-baseline",
+            "rawScore": 0.84,
+            "normalizedScore": 84,
+            "sourceUrl": "urn:decision-catalog:baseline:model:aws-nova-pro",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "rag",
+            "benchmark": "rag-catalog-baseline",
+            "rawScore": 0.84,
+            "normalizedScore": 84,
+            "sourceUrl": "urn:decision-catalog:baseline:model:aws-nova-pro",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "agentic",
+            "benchmark": "agentic-catalog-baseline",
+            "rawScore": 0.84,
+            "normalizedScore": 84,
+            "sourceUrl": "urn:decision-catalog:baseline:model:aws-nova-pro",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          }
+        ],
+        "latency": {
+          "p50Ms": 330,
+          "p95Ms": 550,
+          "ttftMs": 550,
+          "outputTokensPerSecond": 140,
+          "benchmark": "catalog-model-latency-baseline",
+          "sourceUrl": "urn:decision-catalog:baseline:model:aws-nova-pro",
+          "measuredAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "reliability": {
+          "availabilityPercent": 99.89,
+          "errorRatePercent": 0,
+          "sourceUrl": "https://aws.amazon.com/bedrock/pricing/",
+          "observedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "model.security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "Amazon model hosting security documentation",
+              "sourceUrl": "https://aws.amazon.com/bedrock/pricing/",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "metric": "model.pricing",
+          "value": "0.8/3.2",
+          "unit": "USD per 1M tokens",
+          "sourceType": "official-documentation",
+          "sourceName": "Amazon model pricing",
+          "sourceUrl": "https://aws.amazon.com/bedrock/pricing/",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "confidence": 95
+        }
+      ]
+    },
+    {
+      "id": "google-gemini-2.5-flash",
+      "name": "Gemini 2.5 Flash",
+      "provider": "Google",
+      "hostingProviders": [
+        "Google Cloud"
+      ],
+      "capabilities": {
+        "text": true,
+        "image": true,
+        "audio": true,
+        "video": true,
+        "toolCalling": true,
+        "structuredOutput": true,
+        "contextWindow": 1000000
+      },
+      "pricing": {
+        "inputPer1M": 0.3,
+        "cachedInputPer1M": 0.03,
+        "outputPer1M": 2.5,
+        "currency": "USD",
+        "effectiveDate": "2026-08-28",
+        "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+      },
+      "observations": {
+        "qualityBenchmarks": [
+          {
+            "task": "reasoning",
+            "benchmark": "reasoning-catalog-baseline",
+            "rawScore": 0.87,
+            "normalizedScore": 87,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-gemini-2.5-flash",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "extraction",
+            "benchmark": "extraction-catalog-baseline",
+            "rawScore": 0.87,
+            "normalizedScore": 87,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-gemini-2.5-flash",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "summarization",
+            "benchmark": "summarization-catalog-baseline",
+            "rawScore": 0.87,
+            "normalizedScore": 87,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-gemini-2.5-flash",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "rag",
+            "benchmark": "rag-catalog-baseline",
+            "rawScore": 0.87,
+            "normalizedScore": 87,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-gemini-2.5-flash",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "agentic",
+            "benchmark": "agentic-catalog-baseline",
+            "rawScore": 0.87,
+            "normalizedScore": 87,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-gemini-2.5-flash",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          }
+        ],
+        "latency": {
+          "p50Ms": 353,
+          "p95Ms": 587.5,
+          "ttftMs": 587.5,
+          "outputTokensPerSecond": 240,
+          "benchmark": "catalog-model-latency-baseline",
+          "sourceUrl": "urn:decision-catalog:baseline:model:google-gemini-2.5-flash",
+          "measuredAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "reliability": {
+          "availabilityPercent": 99.89,
+          "errorRatePercent": 0,
+          "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+          "observedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "model.security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "Google model hosting security documentation",
+              "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "metric": "model.pricing",
+          "value": "0.3/2.5",
+          "unit": "USD per 1M tokens",
+          "sourceType": "official-documentation",
+          "sourceName": "Google model pricing",
+          "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "confidence": 95
+        }
+      ]
+    },
+    {
+      "id": "oss-vllm-general",
+      "name": "Self-hosted open model",
+      "provider": "Open source",
+      "hostingProviders": [
+        "Open source"
+      ],
+      "capabilities": {
+        "text": true,
+        "image": false,
+        "audio": false,
+        "video": false,
+        "toolCalling": true,
+        "structuredOutput": true,
+        "contextWindow": 128000
+      },
+      "pricing": {
+        "inputPer1M": 0.2,
+        "outputPer1M": 0.8,
+        "currency": "USD",
+        "effectiveDate": "2026-08-27",
+        "sourceUrl": "https://docs.vllm.ai/"
+      },
+      "observations": {
+        "qualityBenchmarks": [
+          {
+            "task": "reasoning",
+            "benchmark": "reasoning-catalog-baseline",
+            "rawScore": 0.76,
+            "normalizedScore": 76,
+            "sourceUrl": "urn:decision-catalog:baseline:model:oss-vllm-general",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "extraction",
+            "benchmark": "extraction-catalog-baseline",
+            "rawScore": 0.82,
+            "normalizedScore": 82,
+            "sourceUrl": "urn:decision-catalog:baseline:model:oss-vllm-general",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "summarization",
+            "benchmark": "summarization-catalog-baseline",
+            "rawScore": 0.8,
+            "normalizedScore": 80,
+            "sourceUrl": "urn:decision-catalog:baseline:model:oss-vllm-general",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "rag",
+            "benchmark": "rag-catalog-baseline",
+            "rawScore": 0.81,
+            "normalizedScore": 81,
+            "sourceUrl": "urn:decision-catalog:baseline:model:oss-vllm-general",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "agentic",
+            "benchmark": "agentic-catalog-baseline",
+            "rawScore": 0.74,
+            "normalizedScore": 74,
+            "sourceUrl": "urn:decision-catalog:baseline:model:oss-vllm-general",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          }
+        ],
+        "latency": {
+          "p50Ms": 810,
+          "p95Ms": 1350,
+          "ttftMs": 1350,
+          "outputTokensPerSecond": 90,
+          "benchmark": "catalog-model-latency-baseline",
+          "sourceUrl": "urn:decision-catalog:baseline:model:oss-vllm-general",
+          "measuredAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "reliability": {
+          "availabilityPercent": 99.75,
+          "errorRatePercent": 0,
+          "sourceUrl": "https://docs.vllm.ai/",
+          "observedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": false,
+            "rbac": true,
+            "managedIdentity": false,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "model.security.controls",
+              "value": 5,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "Open source model hosting security documentation",
+              "sourceUrl": "https://docs.vllm.ai/",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "metric": "model.pricing",
+          "value": "0.2/0.8",
+          "unit": "USD per 1M tokens",
+          "sourceType": "official-documentation",
+          "sourceName": "Open source model pricing",
+          "sourceUrl": "https://docs.vllm.ai/",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "confidence": 95
+        }
+      ]
+    },
+    {
+      "id": "azure-gpt-5.6-terra",
+      "name": "GPT-5.6 terra",
+      "provider": "OpenAI",
+      "hostingProviders": [
+        "Azure"
+      ],
+      "capabilities": {
+        "text": true,
+        "image": true,
+        "audio": false,
+        "video": false,
+        "toolCalling": true,
+        "structuredOutput": true,
+        "contextWindow": 272000
+      },
+      "pricing": {
+        "inputPer1M": 2,
+        "cachedInputPer1M": 0.2,
+        "outputPer1M": 12,
+        "currency": "USD",
+        "effectiveDate": "2026-08-28",
+        "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/"
+      },
+      "observations": {
+        "qualityBenchmarks": [
+          {
+            "task": "reasoning",
+            "benchmark": "reasoning-catalog-baseline",
+            "rawScore": 0.96,
+            "normalizedScore": 96,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.6-terra",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "extraction",
+            "benchmark": "extraction-catalog-baseline",
+            "rawScore": 0.96,
+            "normalizedScore": 96,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.6-terra",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "summarization",
+            "benchmark": "summarization-catalog-baseline",
+            "rawScore": 0.96,
+            "normalizedScore": 96,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.6-terra",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "rag",
+            "benchmark": "rag-catalog-baseline",
+            "rawScore": 0.96,
+            "normalizedScore": 96,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.6-terra",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "agentic",
+            "benchmark": "agentic-catalog-baseline",
+            "rawScore": 0.96,
+            "normalizedScore": 96,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.6-terra",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          }
+        ],
+        "latency": {
+          "p50Ms": 420,
+          "p95Ms": 700,
+          "ttftMs": 1520,
+          "outputTokensPerSecond": 96,
+          "benchmark": "Artificial Analysis LLM Leaderboard - GPT-5.6 Terra (medium)",
+          "sourceUrl": "https://artificialanalysis.ai/leaderboards/models",
+          "measuredAt": "2026-08-30T00:00:00Z",
+          "sourceType": "independent-benchmark"
+        },
+        "reliability": {
+          "availabilityPercent": 99.89,
+          "errorRatePercent": 0,
+          "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+          "observedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "model.security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "OpenAI model hosting security documentation",
+              "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "metric": "model.pricing",
+          "value": "2/12",
+          "unit": "USD per 1M tokens",
+          "sourceType": "official-documentation",
+          "sourceName": "OpenAI model pricing",
+          "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "confidence": 95
+        }
+      ]
+    },
+    {
+      "id": "azure-gpt-5.6-luna",
+      "name": "GPT-5.6 luna",
+      "provider": "OpenAI",
+      "hostingProviders": [
+        "Azure"
+      ],
+      "capabilities": {
+        "text": true,
+        "image": true,
+        "audio": false,
+        "video": false,
+        "toolCalling": true,
+        "structuredOutput": true,
+        "contextWindow": 272000
+      },
+      "pricing": {
+        "inputPer1M": 0.2,
+        "cachedInputPer1M": 0.02,
+        "outputPer1M": 1.2,
+        "currency": "USD",
+        "effectiveDate": "2026-08-28",
+        "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/"
+      },
+      "observations": {
+        "qualityBenchmarks": [
+          {
+            "task": "reasoning",
+            "benchmark": "reasoning-catalog-baseline",
+            "rawScore": 0.82,
+            "normalizedScore": 82,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.6-luna",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "extraction",
+            "benchmark": "extraction-catalog-baseline",
+            "rawScore": 0.82,
+            "normalizedScore": 82,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.6-luna",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "summarization",
+            "benchmark": "summarization-catalog-baseline",
+            "rawScore": 0.82,
+            "normalizedScore": 82,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.6-luna",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "rag",
+            "benchmark": "rag-catalog-baseline",
+            "rawScore": 0.82,
+            "normalizedScore": 82,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.6-luna",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "agentic",
+            "benchmark": "agentic-catalog-baseline",
+            "rawScore": 0.82,
+            "normalizedScore": 82,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.6-luna",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          }
+        ],
+        "latency": {
+          "p50Ms": 315,
+          "p95Ms": 525,
+          "ttftMs": 2430,
+          "outputTokensPerSecond": 113,
+          "benchmark": "Artificial Analysis LLM Leaderboard - GPT-5.6 Luna (medium)",
+          "sourceUrl": "https://artificialanalysis.ai/leaderboards/models",
+          "measuredAt": "2026-08-30T00:00:00Z",
+          "sourceType": "independent-benchmark"
+        },
+        "reliability": {
+          "availabilityPercent": 99.89,
+          "errorRatePercent": 0,
+          "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+          "observedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "model.security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "OpenAI model hosting security documentation",
+              "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "metric": "model.pricing",
+          "value": "0.2/1.2",
+          "unit": "USD per 1M tokens",
+          "sourceType": "official-documentation",
+          "sourceName": "OpenAI model pricing",
+          "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "confidence": 95
+        }
+      ]
+    },
+    {
+      "id": "azure-gpt-5.4",
+      "name": "GPT-5.4",
+      "provider": "OpenAI",
+      "hostingProviders": [
+        "Azure"
+      ],
+      "capabilities": {
+        "text": true,
+        "image": true,
+        "audio": false,
+        "video": false,
+        "toolCalling": true,
+        "structuredOutput": true,
+        "contextWindow": 272000
+      },
+      "pricing": {
+        "inputPer1M": 2.5,
+        "cachedInputPer1M": 0.25,
+        "outputPer1M": 15,
+        "currency": "USD",
+        "effectiveDate": "2026-08-28",
+        "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/"
+      },
+      "observations": {
+        "qualityBenchmarks": [
+          {
+            "task": "reasoning",
+            "benchmark": "reasoning-catalog-baseline",
+            "rawScore": 0.94,
+            "normalizedScore": 94,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.4",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "extraction",
+            "benchmark": "extraction-catalog-baseline",
+            "rawScore": 0.94,
+            "normalizedScore": 94,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.4",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "summarization",
+            "benchmark": "summarization-catalog-baseline",
+            "rawScore": 0.94,
+            "normalizedScore": 94,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.4",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "rag",
+            "benchmark": "rag-catalog-baseline",
+            "rawScore": 0.94,
+            "normalizedScore": 94,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.4",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "agentic",
+            "benchmark": "agentic-catalog-baseline",
+            "rawScore": 0.94,
+            "normalizedScore": 94,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.4",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          }
+        ],
+        "latency": {
+          "p50Ms": 405,
+          "p95Ms": 675,
+          "ttftMs": 675,
+          "outputTokensPerSecond": 120,
+          "benchmark": "catalog-model-latency-baseline",
+          "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5.4",
+          "measuredAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "reliability": {
+          "availabilityPercent": 99.89,
+          "errorRatePercent": 0,
+          "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+          "observedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "model.security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "OpenAI model hosting security documentation",
+              "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "metric": "model.pricing",
+          "value": "2.5/15",
+          "unit": "USD per 1M tokens",
+          "sourceType": "official-documentation",
+          "sourceName": "OpenAI model pricing",
+          "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "confidence": 95
+        }
+      ]
+    },
+    {
+      "id": "azure-gpt-5",
+      "name": "GPT-5",
+      "provider": "OpenAI",
+      "hostingProviders": [
+        "Azure"
+      ],
+      "capabilities": {
+        "text": true,
+        "image": true,
+        "audio": false,
+        "video": false,
+        "toolCalling": true,
+        "structuredOutput": true,
+        "contextWindow": 400000
+      },
+      "pricing": {
+        "inputPer1M": 1.25,
+        "cachedInputPer1M": 0.13,
+        "outputPer1M": 10,
+        "currency": "USD",
+        "effectiveDate": "2026-08-28",
+        "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/"
+      },
+      "observations": {
+        "qualityBenchmarks": [
+          {
+            "task": "reasoning",
+            "benchmark": "reasoning-catalog-baseline",
+            "rawScore": 0.92,
+            "normalizedScore": 92,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "extraction",
+            "benchmark": "extraction-catalog-baseline",
+            "rawScore": 0.92,
+            "normalizedScore": 92,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "summarization",
+            "benchmark": "summarization-catalog-baseline",
+            "rawScore": 0.92,
+            "normalizedScore": 92,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "rag",
+            "benchmark": "rag-catalog-baseline",
+            "rawScore": 0.92,
+            "normalizedScore": 92,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "agentic",
+            "benchmark": "agentic-catalog-baseline",
+            "rawScore": 0.92,
+            "normalizedScore": 92,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          }
+        ],
+        "latency": {
+          "p50Ms": 390,
+          "p95Ms": 650,
+          "ttftMs": 650,
+          "outputTokensPerSecond": 110,
+          "benchmark": "catalog-model-latency-baseline",
+          "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-5",
+          "measuredAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "reliability": {
+          "availabilityPercent": 99.89,
+          "errorRatePercent": 0,
+          "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+          "observedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "model.security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "OpenAI model hosting security documentation",
+              "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "metric": "model.pricing",
+          "value": "1.25/10",
+          "unit": "USD per 1M tokens",
+          "sourceType": "official-documentation",
+          "sourceName": "OpenAI model pricing",
+          "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "confidence": 95
+        }
+      ]
+    },
+    {
+      "id": "azure-gpt-4.1",
+      "name": "GPT-4.1",
+      "provider": "OpenAI",
+      "hostingProviders": [
+        "Azure"
+      ],
+      "capabilities": {
+        "text": true,
+        "image": true,
+        "audio": false,
+        "video": false,
+        "toolCalling": true,
+        "structuredOutput": true,
+        "contextWindow": 1000000
+      },
+      "pricing": {
+        "inputPer1M": 2,
+        "cachedInputPer1M": 0.5,
+        "outputPer1M": 8,
+        "currency": "USD",
+        "effectiveDate": "2026-08-28",
+        "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/"
+      },
+      "observations": {
+        "qualityBenchmarks": [
+          {
+            "task": "reasoning",
+            "benchmark": "reasoning-catalog-baseline",
+            "rawScore": 0.87,
+            "normalizedScore": 87,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-4.1",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "extraction",
+            "benchmark": "extraction-catalog-baseline",
+            "rawScore": 0.87,
+            "normalizedScore": 87,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-4.1",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "summarization",
+            "benchmark": "summarization-catalog-baseline",
+            "rawScore": 0.87,
+            "normalizedScore": 87,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-4.1",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "rag",
+            "benchmark": "rag-catalog-baseline",
+            "rawScore": 0.87,
+            "normalizedScore": 87,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-4.1",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "agentic",
+            "benchmark": "agentic-catalog-baseline",
+            "rawScore": 0.87,
+            "normalizedScore": 87,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-4.1",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          }
+        ],
+        "latency": {
+          "p50Ms": 353,
+          "p95Ms": 587.5,
+          "ttftMs": 587.5,
+          "outputTokensPerSecond": 130,
+          "benchmark": "catalog-model-latency-baseline",
+          "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-4.1",
+          "measuredAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "reliability": {
+          "availabilityPercent": 99.89,
+          "errorRatePercent": 0,
+          "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+          "observedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "model.security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "OpenAI model hosting security documentation",
+              "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "metric": "model.pricing",
+          "value": "2/8",
+          "unit": "USD per 1M tokens",
+          "sourceType": "official-documentation",
+          "sourceName": "OpenAI model pricing",
+          "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "confidence": 95
+        }
+      ]
+    },
+    {
+      "id": "azure-gpt-4.1-mini",
+      "name": "GPT-4.1 mini",
+      "provider": "OpenAI",
+      "hostingProviders": [
+        "Azure"
+      ],
+      "capabilities": {
+        "text": true,
+        "image": true,
+        "audio": false,
+        "video": false,
+        "toolCalling": true,
+        "structuredOutput": true,
+        "contextWindow": 1000000
+      },
+      "pricing": {
+        "inputPer1M": 0.4,
+        "cachedInputPer1M": 0.1,
+        "outputPer1M": 1.6,
+        "currency": "USD",
+        "effectiveDate": "2026-08-28",
+        "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/"
+      },
+      "observations": {
+        "qualityBenchmarks": [
+          {
+            "task": "reasoning",
+            "benchmark": "reasoning-catalog-baseline",
+            "rawScore": 0.79,
+            "normalizedScore": 79,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-4.1-mini",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "extraction",
+            "benchmark": "extraction-catalog-baseline",
+            "rawScore": 0.79,
+            "normalizedScore": 79,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-4.1-mini",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "summarization",
+            "benchmark": "summarization-catalog-baseline",
+            "rawScore": 0.79,
+            "normalizedScore": 79,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-4.1-mini",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "rag",
+            "benchmark": "rag-catalog-baseline",
+            "rawScore": 0.79,
+            "normalizedScore": 79,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-4.1-mini",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "agentic",
+            "benchmark": "agentic-catalog-baseline",
+            "rawScore": 0.79,
+            "normalizedScore": 79,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-4.1-mini",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          }
+        ],
+        "latency": {
+          "p50Ms": 293,
+          "p95Ms": 487.5,
+          "ttftMs": 487.5,
+          "outputTokensPerSecond": 190,
+          "benchmark": "catalog-model-latency-baseline",
+          "sourceUrl": "urn:decision-catalog:baseline:model:azure-gpt-4.1-mini",
+          "measuredAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "reliability": {
+          "availabilityPercent": 99.89,
+          "errorRatePercent": 0,
+          "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+          "observedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "model.security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "OpenAI model hosting security documentation",
+              "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "metric": "model.pricing",
+          "value": "0.4/1.6",
+          "unit": "USD per 1M tokens",
+          "sourceType": "official-documentation",
+          "sourceName": "OpenAI model pricing",
+          "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "confidence": 95
+        }
+      ]
+    },
+    {
+      "id": "azure-o3",
+      "name": "o3",
+      "provider": "OpenAI",
+      "hostingProviders": [
+        "Azure"
+      ],
+      "capabilities": {
+        "text": true,
+        "image": true,
+        "audio": false,
+        "video": false,
+        "toolCalling": true,
+        "structuredOutput": true,
+        "contextWindow": 200000
+      },
+      "pricing": {
+        "inputPer1M": 2,
+        "cachedInputPer1M": 0.5,
+        "outputPer1M": 8,
+        "currency": "USD",
+        "effectiveDate": "2026-08-28",
+        "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/"
+      },
+      "observations": {
+        "qualityBenchmarks": [
+          {
+            "task": "reasoning",
+            "benchmark": "reasoning-catalog-baseline",
+            "rawScore": 0.95,
+            "normalizedScore": 95,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-o3",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "extraction",
+            "benchmark": "extraction-catalog-baseline",
+            "rawScore": 0.95,
+            "normalizedScore": 95,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-o3",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "summarization",
+            "benchmark": "summarization-catalog-baseline",
+            "rawScore": 0.95,
+            "normalizedScore": 95,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-o3",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "rag",
+            "benchmark": "rag-catalog-baseline",
+            "rawScore": 0.95,
+            "normalizedScore": 95,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-o3",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "agentic",
+            "benchmark": "agentic-catalog-baseline",
+            "rawScore": 0.95,
+            "normalizedScore": 95,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-o3",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          }
+        ],
+        "latency": {
+          "p50Ms": 413,
+          "p95Ms": 687.5,
+          "ttftMs": 8130,
+          "outputTokensPerSecond": 111,
+          "benchmark": "Artificial Analysis LLM Leaderboard - o3",
+          "sourceUrl": "https://artificialanalysis.ai/leaderboards/models",
+          "measuredAt": "2026-08-30T00:00:00Z",
+          "sourceType": "independent-benchmark"
+        },
+        "reliability": {
+          "availabilityPercent": 99.89,
+          "errorRatePercent": 0,
+          "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+          "observedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "model.security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "OpenAI model hosting security documentation",
+              "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "metric": "model.pricing",
+          "value": "2/8",
+          "unit": "USD per 1M tokens",
+          "sourceType": "official-documentation",
+          "sourceName": "OpenAI model pricing",
+          "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "confidence": 95
+        }
+      ]
+    },
+    {
+      "id": "azure-o4-mini",
+      "name": "o4-mini",
+      "provider": "OpenAI",
+      "hostingProviders": [
+        "Azure"
+      ],
+      "capabilities": {
+        "text": true,
+        "image": true,
+        "audio": false,
+        "video": false,
+        "toolCalling": true,
+        "structuredOutput": true,
+        "contextWindow": 200000
+      },
+      "pricing": {
+        "inputPer1M": 1.1,
+        "cachedInputPer1M": 0.28,
+        "outputPer1M": 4.4,
+        "currency": "USD",
+        "effectiveDate": "2026-08-28",
+        "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/"
+      },
+      "observations": {
+        "qualityBenchmarks": [
+          {
+            "task": "reasoning",
+            "benchmark": "reasoning-catalog-baseline",
+            "rawScore": 0.9,
+            "normalizedScore": 90,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-o4-mini",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "extraction",
+            "benchmark": "extraction-catalog-baseline",
+            "rawScore": 0.9,
+            "normalizedScore": 90,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-o4-mini",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "summarization",
+            "benchmark": "summarization-catalog-baseline",
+            "rawScore": 0.9,
+            "normalizedScore": 90,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-o4-mini",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "rag",
+            "benchmark": "rag-catalog-baseline",
+            "rawScore": 0.9,
+            "normalizedScore": 90,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-o4-mini",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "agentic",
+            "benchmark": "agentic-catalog-baseline",
+            "rawScore": 0.9,
+            "normalizedScore": 90,
+            "sourceUrl": "urn:decision-catalog:baseline:model:azure-o4-mini",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          }
+        ],
+        "latency": {
+          "p50Ms": 375,
+          "p95Ms": 625,
+          "ttftMs": 625,
+          "outputTokensPerSecond": 120,
+          "benchmark": "catalog-model-latency-baseline",
+          "sourceUrl": "urn:decision-catalog:baseline:model:azure-o4-mini",
+          "measuredAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "reliability": {
+          "availabilityPercent": 99.89,
+          "errorRatePercent": 0,
+          "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+          "observedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "model.security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "OpenAI model hosting security documentation",
+              "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "metric": "model.pricing",
+          "value": "1.1/4.4",
+          "unit": "USD per 1M tokens",
+          "sourceType": "official-documentation",
+          "sourceName": "OpenAI model pricing",
+          "sourceUrl": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "confidence": 95
+        }
+      ]
+    },
+    {
+      "id": "aws-nova-lite",
+      "name": "Amazon Nova Lite",
+      "provider": "Amazon",
+      "hostingProviders": [
+        "AWS"
+      ],
+      "capabilities": {
+        "text": true,
+        "image": true,
+        "audio": false,
+        "video": true,
+        "toolCalling": true,
+        "structuredOutput": true,
+        "contextWindow": 300000
+      },
+      "pricing": {
+        "inputPer1M": 0.06,
+        "outputPer1M": 0.24,
+        "currency": "USD",
+        "effectiveDate": "2026-08-28",
+        "sourceUrl": "https://aws.amazon.com/bedrock/pricing/"
+      },
+      "observations": {
+        "qualityBenchmarks": [
+          {
+            "task": "reasoning",
+            "benchmark": "reasoning-catalog-baseline",
+            "rawScore": 0.72,
+            "normalizedScore": 72,
+            "sourceUrl": "urn:decision-catalog:baseline:model:aws-nova-lite",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "extraction",
+            "benchmark": "extraction-catalog-baseline",
+            "rawScore": 0.72,
+            "normalizedScore": 72,
+            "sourceUrl": "urn:decision-catalog:baseline:model:aws-nova-lite",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "summarization",
+            "benchmark": "summarization-catalog-baseline",
+            "rawScore": 0.72,
+            "normalizedScore": 72,
+            "sourceUrl": "urn:decision-catalog:baseline:model:aws-nova-lite",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "rag",
+            "benchmark": "rag-catalog-baseline",
+            "rawScore": 0.72,
+            "normalizedScore": 72,
+            "sourceUrl": "urn:decision-catalog:baseline:model:aws-nova-lite",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "agentic",
+            "benchmark": "agentic-catalog-baseline",
+            "rawScore": 0.72,
+            "normalizedScore": 72,
+            "sourceUrl": "urn:decision-catalog:baseline:model:aws-nova-lite",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          }
+        ],
+        "latency": {
+          "p50Ms": 240,
+          "p95Ms": 400,
+          "ttftMs": 400,
+          "outputTokensPerSecond": 280,
+          "benchmark": "catalog-model-latency-baseline",
+          "sourceUrl": "urn:decision-catalog:baseline:model:aws-nova-lite",
+          "measuredAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "reliability": {
+          "availabilityPercent": 99.89,
+          "errorRatePercent": 0,
+          "sourceUrl": "https://aws.amazon.com/bedrock/pricing/",
+          "observedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "model.security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "Amazon model hosting security documentation",
+              "sourceUrl": "https://aws.amazon.com/bedrock/pricing/",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "metric": "model.pricing",
+          "value": "0.06/0.24",
+          "unit": "USD per 1M tokens",
+          "sourceType": "official-documentation",
+          "sourceName": "Amazon model pricing",
+          "sourceUrl": "https://aws.amazon.com/bedrock/pricing/",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "confidence": 95
+        }
+      ]
+    },
+    {
+      "id": "aws-nova-micro",
+      "name": "Amazon Nova Micro",
+      "provider": "Amazon",
+      "hostingProviders": [
+        "AWS"
+      ],
+      "capabilities": {
+        "text": true,
+        "image": false,
+        "audio": false,
+        "video": false,
+        "toolCalling": true,
+        "structuredOutput": true,
+        "contextWindow": 128000
+      },
+      "pricing": {
+        "inputPer1M": 0.035,
+        "outputPer1M": 0.14,
+        "currency": "USD",
+        "effectiveDate": "2026-08-28",
+        "sourceUrl": "https://aws.amazon.com/bedrock/pricing/"
+      },
+      "observations": {
+        "qualityBenchmarks": [
+          {
+            "task": "reasoning",
+            "benchmark": "reasoning-catalog-baseline",
+            "rawScore": 0.68,
+            "normalizedScore": 68,
+            "sourceUrl": "urn:decision-catalog:baseline:model:aws-nova-micro",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "extraction",
+            "benchmark": "extraction-catalog-baseline",
+            "rawScore": 0.68,
+            "normalizedScore": 68,
+            "sourceUrl": "urn:decision-catalog:baseline:model:aws-nova-micro",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "summarization",
+            "benchmark": "summarization-catalog-baseline",
+            "rawScore": 0.68,
+            "normalizedScore": 68,
+            "sourceUrl": "urn:decision-catalog:baseline:model:aws-nova-micro",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "rag",
+            "benchmark": "rag-catalog-baseline",
+            "rawScore": 0.68,
+            "normalizedScore": 68,
+            "sourceUrl": "urn:decision-catalog:baseline:model:aws-nova-micro",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "agentic",
+            "benchmark": "agentic-catalog-baseline",
+            "rawScore": 0.68,
+            "normalizedScore": 68,
+            "sourceUrl": "urn:decision-catalog:baseline:model:aws-nova-micro",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          }
+        ],
+        "latency": {
+          "p50Ms": 210,
+          "p95Ms": 350,
+          "ttftMs": 860,
+          "outputTokensPerSecond": 264,
+          "benchmark": "Artificial Analysis LLM Leaderboard - Nova Micro",
+          "sourceUrl": "https://artificialanalysis.ai/leaderboards/models",
+          "measuredAt": "2026-08-30T00:00:00Z",
+          "sourceType": "independent-benchmark"
+        },
+        "reliability": {
+          "availabilityPercent": 99.89,
+          "errorRatePercent": 0,
+          "sourceUrl": "https://aws.amazon.com/bedrock/pricing/",
+          "observedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "model.security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "Amazon model hosting security documentation",
+              "sourceUrl": "https://aws.amazon.com/bedrock/pricing/",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "metric": "model.pricing",
+          "value": "0.035/0.14",
+          "unit": "USD per 1M tokens",
+          "sourceType": "official-documentation",
+          "sourceName": "Amazon model pricing",
+          "sourceUrl": "https://aws.amazon.com/bedrock/pricing/",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "confidence": 95
+        }
+      ]
+    },
+    {
+      "id": "aws-claude-sonnet-4.6",
+      "name": "Claude Sonnet 4.6",
+      "provider": "Anthropic",
+      "hostingProviders": [
+        "AWS"
+      ],
+      "capabilities": {
+        "text": true,
+        "image": true,
+        "audio": false,
+        "video": false,
+        "toolCalling": true,
+        "structuredOutput": true,
+        "contextWindow": 200000
+      },
+      "pricing": {
+        "inputPer1M": 3,
+        "cachedInputPer1M": 0.3,
+        "outputPer1M": 15,
+        "currency": "USD",
+        "effectiveDate": "2026-08-28",
+        "sourceUrl": "https://aws.amazon.com/bedrock/pricing/"
+      },
+      "observations": {
+        "qualityBenchmarks": [
+          {
+            "task": "reasoning",
+            "benchmark": "reasoning-catalog-baseline",
+            "rawScore": 0.94,
+            "normalizedScore": 94,
+            "sourceUrl": "urn:decision-catalog:baseline:model:aws-claude-sonnet-4.6",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "extraction",
+            "benchmark": "extraction-catalog-baseline",
+            "rawScore": 0.94,
+            "normalizedScore": 94,
+            "sourceUrl": "urn:decision-catalog:baseline:model:aws-claude-sonnet-4.6",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "summarization",
+            "benchmark": "summarization-catalog-baseline",
+            "rawScore": 0.94,
+            "normalizedScore": 94,
+            "sourceUrl": "urn:decision-catalog:baseline:model:aws-claude-sonnet-4.6",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "rag",
+            "benchmark": "rag-catalog-baseline",
+            "rawScore": 0.94,
+            "normalizedScore": 94,
+            "sourceUrl": "urn:decision-catalog:baseline:model:aws-claude-sonnet-4.6",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "agentic",
+            "benchmark": "agentic-catalog-baseline",
+            "rawScore": 0.94,
+            "normalizedScore": 94,
+            "sourceUrl": "urn:decision-catalog:baseline:model:aws-claude-sonnet-4.6",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          }
+        ],
+        "latency": {
+          "p50Ms": 405,
+          "p95Ms": 675,
+          "ttftMs": 2020,
+          "outputTokensPerSecond": 43,
+          "benchmark": "Artificial Analysis LLM Leaderboard - Claude Sonnet 4.6 (Non-reasoning, low)",
+          "sourceUrl": "https://artificialanalysis.ai/leaderboards/models",
+          "measuredAt": "2026-08-30T00:00:00Z",
+          "sourceType": "independent-benchmark"
+        },
+        "reliability": {
+          "availabilityPercent": 99.89,
+          "errorRatePercent": 0,
+          "sourceUrl": "https://aws.amazon.com/bedrock/pricing/",
+          "observedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "model.security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "Anthropic model hosting security documentation",
+              "sourceUrl": "https://aws.amazon.com/bedrock/pricing/",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "metric": "model.pricing",
+          "value": "3/15",
+          "unit": "USD per 1M tokens",
+          "sourceType": "official-documentation",
+          "sourceName": "Anthropic model pricing",
+          "sourceUrl": "https://aws.amazon.com/bedrock/pricing/",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "confidence": 95
+        }
+      ]
+    },
+    {
+      "id": "aws-deepseek-r1",
+      "name": "DeepSeek R1",
+      "provider": "DeepSeek",
+      "hostingProviders": [
+        "AWS"
+      ],
+      "capabilities": {
+        "text": true,
+        "image": false,
+        "audio": false,
+        "video": false,
+        "toolCalling": true,
+        "structuredOutput": true,
+        "contextWindow": 128000
+      },
+      "pricing": {
+        "inputPer1M": 1.35,
+        "outputPer1M": 5.4,
+        "currency": "USD",
+        "effectiveDate": "2026-08-28",
+        "sourceUrl": "https://aws.amazon.com/bedrock/pricing/"
+      },
+      "observations": {
+        "qualityBenchmarks": [
+          {
+            "task": "reasoning",
+            "benchmark": "reasoning-catalog-baseline",
+            "rawScore": 0.92,
+            "normalizedScore": 92,
+            "sourceUrl": "urn:decision-catalog:baseline:model:aws-deepseek-r1",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "extraction",
+            "benchmark": "extraction-catalog-baseline",
+            "rawScore": 0.92,
+            "normalizedScore": 92,
+            "sourceUrl": "urn:decision-catalog:baseline:model:aws-deepseek-r1",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "summarization",
+            "benchmark": "summarization-catalog-baseline",
+            "rawScore": 0.92,
+            "normalizedScore": 92,
+            "sourceUrl": "urn:decision-catalog:baseline:model:aws-deepseek-r1",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "rag",
+            "benchmark": "rag-catalog-baseline",
+            "rawScore": 0.92,
+            "normalizedScore": 92,
+            "sourceUrl": "urn:decision-catalog:baseline:model:aws-deepseek-r1",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "agentic",
+            "benchmark": "agentic-catalog-baseline",
+            "rawScore": 0.92,
+            "normalizedScore": 92,
+            "sourceUrl": "urn:decision-catalog:baseline:model:aws-deepseek-r1",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          }
+        ],
+        "latency": {
+          "p50Ms": 390,
+          "p95Ms": 650,
+          "ttftMs": 650,
+          "outputTokensPerSecond": 75,
+          "benchmark": "catalog-model-latency-baseline",
+          "sourceUrl": "urn:decision-catalog:baseline:model:aws-deepseek-r1",
+          "measuredAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "reliability": {
+          "availabilityPercent": 99.89,
+          "errorRatePercent": 0,
+          "sourceUrl": "https://aws.amazon.com/bedrock/pricing/",
+          "observedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "model.security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "DeepSeek model hosting security documentation",
+              "sourceUrl": "https://aws.amazon.com/bedrock/pricing/",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "metric": "model.pricing",
+          "value": "1.35/5.4",
+          "unit": "USD per 1M tokens",
+          "sourceType": "official-documentation",
+          "sourceName": "DeepSeek model pricing",
+          "sourceUrl": "https://aws.amazon.com/bedrock/pricing/",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "confidence": 95
+        }
+      ]
+    },
+    {
+      "id": "google-gemini-3.1-pro",
+      "name": "Gemini 3.1 Pro Preview",
+      "provider": "Google",
+      "hostingProviders": [
+        "Google Cloud"
+      ],
+      "capabilities": {
+        "text": true,
+        "image": true,
+        "audio": true,
+        "video": true,
+        "toolCalling": true,
+        "structuredOutput": true,
+        "contextWindow": 1000000
+      },
+      "pricing": {
+        "inputPer1M": 2,
+        "cachedInputPer1M": 0.2,
+        "outputPer1M": 12,
+        "currency": "USD",
+        "effectiveDate": "2026-08-28",
+        "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+      },
+      "observations": {
+        "qualityBenchmarks": [
+          {
+            "task": "reasoning",
+            "benchmark": "reasoning-catalog-baseline",
+            "rawScore": 0.96,
+            "normalizedScore": 96,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-gemini-3.1-pro",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "extraction",
+            "benchmark": "extraction-catalog-baseline",
+            "rawScore": 0.96,
+            "normalizedScore": 96,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-gemini-3.1-pro",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "summarization",
+            "benchmark": "summarization-catalog-baseline",
+            "rawScore": 0.96,
+            "normalizedScore": 96,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-gemini-3.1-pro",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "rag",
+            "benchmark": "rag-catalog-baseline",
+            "rawScore": 0.96,
+            "normalizedScore": 96,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-gemini-3.1-pro",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "agentic",
+            "benchmark": "agentic-catalog-baseline",
+            "rawScore": 0.96,
+            "normalizedScore": 96,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-gemini-3.1-pro",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          }
+        ],
+        "latency": {
+          "p50Ms": 420,
+          "p95Ms": 700,
+          "ttftMs": 24090,
+          "outputTokensPerSecond": 115,
+          "benchmark": "Artificial Analysis LLM Leaderboard - Gemini 3.1 Pro Preview",
+          "sourceUrl": "https://artificialanalysis.ai/leaderboards/models",
+          "measuredAt": "2026-08-30T00:00:00Z",
+          "sourceType": "independent-benchmark"
+        },
+        "reliability": {
+          "availabilityPercent": 99.89,
+          "errorRatePercent": 0,
+          "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+          "observedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "model.security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "Google model hosting security documentation",
+              "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "metric": "model.pricing",
+          "value": "2/12",
+          "unit": "USD per 1M tokens",
+          "sourceType": "official-documentation",
+          "sourceName": "Google model pricing",
+          "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "confidence": 95
+        }
+      ]
+    },
+    {
+      "id": "google-gemini-3.7-flash",
+      "name": "Gemini 3.7 Flash",
+      "provider": "Google",
+      "hostingProviders": [
+        "Google Cloud"
+      ],
+      "capabilities": {
+        "text": true,
+        "image": true,
+        "audio": true,
+        "video": true,
+        "toolCalling": true,
+        "structuredOutput": true,
+        "contextWindow": 1000000
+      },
+      "pricing": {
+        "inputPer1M": 0.75,
+        "cachedInputPer1M": 0.075,
+        "outputPer1M": 3.75,
+        "currency": "USD",
+        "effectiveDate": "2026-08-28",
+        "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+      },
+      "observations": {
+        "qualityBenchmarks": [
+          {
+            "task": "reasoning",
+            "benchmark": "reasoning-catalog-baseline",
+            "rawScore": 0.9,
+            "normalizedScore": 90,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-gemini-3.7-flash",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "extraction",
+            "benchmark": "extraction-catalog-baseline",
+            "rawScore": 0.9,
+            "normalizedScore": 90,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-gemini-3.7-flash",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "summarization",
+            "benchmark": "summarization-catalog-baseline",
+            "rawScore": 0.9,
+            "normalizedScore": 90,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-gemini-3.7-flash",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "rag",
+            "benchmark": "rag-catalog-baseline",
+            "rawScore": 0.9,
+            "normalizedScore": 90,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-gemini-3.7-flash",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "agentic",
+            "benchmark": "agentic-catalog-baseline",
+            "rawScore": 0.9,
+            "normalizedScore": 90,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-gemini-3.7-flash",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          }
+        ],
+        "latency": {
+          "p50Ms": 375,
+          "p95Ms": 625,
+          "ttftMs": 4710,
+          "outputTokensPerSecond": 332,
+          "benchmark": "Artificial Analysis LLM Leaderboard - Gemini 3.7 Flash (medium)",
+          "sourceUrl": "https://artificialanalysis.ai/leaderboards/models",
+          "measuredAt": "2026-08-30T00:00:00Z",
+          "sourceType": "independent-benchmark"
+        },
+        "reliability": {
+          "availabilityPercent": 99.89,
+          "errorRatePercent": 0,
+          "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+          "observedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "model.security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "Google model hosting security documentation",
+              "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "metric": "model.pricing",
+          "value": "0.75/3.75",
+          "unit": "USD per 1M tokens",
+          "sourceType": "official-documentation",
+          "sourceName": "Google model pricing",
+          "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "confidence": 95
+        }
+      ]
+    },
+    {
+      "id": "google-gemini-3.5-flash-lite",
+      "name": "Gemini 3.5 Flash-Lite",
+      "provider": "Google",
+      "hostingProviders": [
+        "Google Cloud"
+      ],
+      "capabilities": {
+        "text": true,
+        "image": true,
+        "audio": true,
+        "video": true,
+        "toolCalling": true,
+        "structuredOutput": true,
+        "contextWindow": 1000000
+      },
+      "pricing": {
+        "inputPer1M": 0.3,
+        "cachedInputPer1M": 0.03,
+        "outputPer1M": 2.5,
+        "currency": "USD",
+        "effectiveDate": "2026-08-28",
+        "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+      },
+      "observations": {
+        "qualityBenchmarks": [
+          {
+            "task": "reasoning",
+            "benchmark": "reasoning-catalog-baseline",
+            "rawScore": 0.78,
+            "normalizedScore": 78,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-gemini-3.5-flash-lite",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "extraction",
+            "benchmark": "extraction-catalog-baseline",
+            "rawScore": 0.78,
+            "normalizedScore": 78,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-gemini-3.5-flash-lite",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "summarization",
+            "benchmark": "summarization-catalog-baseline",
+            "rawScore": 0.78,
+            "normalizedScore": 78,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-gemini-3.5-flash-lite",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "rag",
+            "benchmark": "rag-catalog-baseline",
+            "rawScore": 0.78,
+            "normalizedScore": 78,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-gemini-3.5-flash-lite",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "agentic",
+            "benchmark": "agentic-catalog-baseline",
+            "rawScore": 0.78,
+            "normalizedScore": 78,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-gemini-3.5-flash-lite",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          }
+        ],
+        "latency": {
+          "p50Ms": 285,
+          "p95Ms": 475,
+          "ttftMs": 9250,
+          "outputTokensPerSecond": 379,
+          "benchmark": "Artificial Analysis LLM Leaderboard - Gemini 3.5 Flash-Lite",
+          "sourceUrl": "https://artificialanalysis.ai/leaderboards/models",
+          "measuredAt": "2026-08-30T00:00:00Z",
+          "sourceType": "independent-benchmark"
+        },
+        "reliability": {
+          "availabilityPercent": 99.89,
+          "errorRatePercent": 0,
+          "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+          "observedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "model.security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "Google model hosting security documentation",
+              "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "metric": "model.pricing",
+          "value": "0.3/2.5",
+          "unit": "USD per 1M tokens",
+          "sourceType": "official-documentation",
+          "sourceName": "Google model pricing",
+          "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "confidence": 95
+        }
+      ]
+    },
+    {
+      "id": "google-claude-sonnet-5",
+      "name": "Claude Sonnet 5",
+      "provider": "Anthropic",
+      "hostingProviders": [
+        "Google Cloud"
+      ],
+      "capabilities": {
+        "text": true,
+        "image": true,
+        "audio": false,
+        "video": false,
+        "toolCalling": true,
+        "structuredOutput": true,
+        "contextWindow": 200000
+      },
+      "pricing": {
+        "inputPer1M": 2,
+        "cachedInputPer1M": 0.2,
+        "outputPer1M": 10,
+        "currency": "USD",
+        "effectiveDate": "2026-08-28",
+        "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+      },
+      "observations": {
+        "qualityBenchmarks": [
+          {
+            "task": "reasoning",
+            "benchmark": "reasoning-catalog-baseline",
+            "rawScore": 0.96,
+            "normalizedScore": 96,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-claude-sonnet-5",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "extraction",
+            "benchmark": "extraction-catalog-baseline",
+            "rawScore": 0.96,
+            "normalizedScore": 96,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-claude-sonnet-5",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "summarization",
+            "benchmark": "summarization-catalog-baseline",
+            "rawScore": 0.96,
+            "normalizedScore": 96,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-claude-sonnet-5",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "rag",
+            "benchmark": "rag-catalog-baseline",
+            "rawScore": 0.96,
+            "normalizedScore": 96,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-claude-sonnet-5",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "agentic",
+            "benchmark": "agentic-catalog-baseline",
+            "rawScore": 0.96,
+            "normalizedScore": 96,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-claude-sonnet-5",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          }
+        ],
+        "latency": {
+          "p50Ms": 420,
+          "p95Ms": 700,
+          "ttftMs": 2230,
+          "outputTokensPerSecond": 64,
+          "benchmark": "Artificial Analysis LLM Leaderboard - Claude Sonnet 5 (medium)",
+          "sourceUrl": "https://artificialanalysis.ai/leaderboards/models",
+          "measuredAt": "2026-08-30T00:00:00Z",
+          "sourceType": "independent-benchmark"
+        },
+        "reliability": {
+          "availabilityPercent": 99.89,
+          "errorRatePercent": 0,
+          "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+          "observedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "model.security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "Anthropic model hosting security documentation",
+              "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "metric": "model.pricing",
+          "value": "2/10",
+          "unit": "USD per 1M tokens",
+          "sourceType": "official-documentation",
+          "sourceName": "Anthropic model pricing",
+          "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "confidence": 95
+        }
+      ]
+    },
+    {
+      "id": "google-grok-4.20",
+      "name": "Grok 4.20 Reasoning",
+      "provider": "xAI",
+      "hostingProviders": [
+        "Google Cloud"
+      ],
+      "capabilities": {
+        "text": true,
+        "image": false,
+        "audio": false,
+        "video": false,
+        "toolCalling": true,
+        "structuredOutput": true,
+        "contextWindow": 200000
+      },
+      "pricing": {
+        "inputPer1M": 1.25,
+        "cachedInputPer1M": 0.2,
+        "outputPer1M": 2.5,
+        "currency": "USD",
+        "effectiveDate": "2026-08-28",
+        "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+      },
+      "observations": {
+        "qualityBenchmarks": [
+          {
+            "task": "reasoning",
+            "benchmark": "reasoning-catalog-baseline",
+            "rawScore": 0.93,
+            "normalizedScore": 93,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-grok-4.20",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "extraction",
+            "benchmark": "extraction-catalog-baseline",
+            "rawScore": 0.93,
+            "normalizedScore": 93,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-grok-4.20",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "summarization",
+            "benchmark": "summarization-catalog-baseline",
+            "rawScore": 0.93,
+            "normalizedScore": 93,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-grok-4.20",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "rag",
+            "benchmark": "rag-catalog-baseline",
+            "rawScore": 0.93,
+            "normalizedScore": 93,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-grok-4.20",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "agentic",
+            "benchmark": "agentic-catalog-baseline",
+            "rawScore": 0.93,
+            "normalizedScore": 93,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-grok-4.20",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          }
+        ],
+        "latency": {
+          "p50Ms": 398,
+          "p95Ms": 662.5,
+          "ttftMs": 662.5,
+          "outputTokensPerSecond": 100,
+          "benchmark": "catalog-model-latency-baseline",
+          "sourceUrl": "urn:decision-catalog:baseline:model:google-grok-4.20",
+          "measuredAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "reliability": {
+          "availabilityPercent": 99.89,
+          "errorRatePercent": 0,
+          "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+          "observedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "model.security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "xAI model hosting security documentation",
+              "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "metric": "model.pricing",
+          "value": "1.25/2.5",
+          "unit": "USD per 1M tokens",
+          "sourceType": "official-documentation",
+          "sourceName": "xAI model pricing",
+          "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "confidence": 95
+        }
+      ]
+    },
+    {
+      "id": "google-deepseek-v3.2",
+      "name": "DeepSeek V3.2",
+      "provider": "DeepSeek",
+      "hostingProviders": [
+        "Google Cloud"
+      ],
+      "capabilities": {
+        "text": true,
+        "image": false,
+        "audio": false,
+        "video": false,
+        "toolCalling": true,
+        "structuredOutput": true,
+        "contextWindow": 128000
+      },
+      "pricing": {
+        "inputPer1M": 0.56,
+        "cachedInputPer1M": 0.056,
+        "outputPer1M": 1.68,
+        "currency": "USD",
+        "effectiveDate": "2026-08-28",
+        "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+      },
+      "observations": {
+        "qualityBenchmarks": [
+          {
+            "task": "reasoning",
+            "benchmark": "reasoning-catalog-baseline",
+            "rawScore": 0.89,
+            "normalizedScore": 89,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-deepseek-v3.2",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "extraction",
+            "benchmark": "extraction-catalog-baseline",
+            "rawScore": 0.89,
+            "normalizedScore": 89,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-deepseek-v3.2",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "summarization",
+            "benchmark": "summarization-catalog-baseline",
+            "rawScore": 0.89,
+            "normalizedScore": 89,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-deepseek-v3.2",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "rag",
+            "benchmark": "rag-catalog-baseline",
+            "rawScore": 0.89,
+            "normalizedScore": 89,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-deepseek-v3.2",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "agentic",
+            "benchmark": "agentic-catalog-baseline",
+            "rawScore": 0.89,
+            "normalizedScore": 89,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-deepseek-v3.2",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          }
+        ],
+        "latency": {
+          "p50Ms": 368,
+          "p95Ms": 612.5,
+          "ttftMs": 612.5,
+          "outputTokensPerSecond": 95,
+          "benchmark": "catalog-model-latency-baseline",
+          "sourceUrl": "urn:decision-catalog:baseline:model:google-deepseek-v3.2",
+          "measuredAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "reliability": {
+          "availabilityPercent": 99.89,
+          "errorRatePercent": 0,
+          "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+          "observedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "model.security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "DeepSeek model hosting security documentation",
+              "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "metric": "model.pricing",
+          "value": "0.56/1.68",
+          "unit": "USD per 1M tokens",
+          "sourceType": "official-documentation",
+          "sourceName": "DeepSeek model pricing",
+          "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "confidence": 95
+        }
+      ]
+    },
+    {
+      "id": "google-llama-4-maverick",
+      "name": "Llama 4 Maverick",
+      "provider": "Meta",
+      "hostingProviders": [
+        "Google Cloud"
+      ],
+      "capabilities": {
+        "text": true,
+        "image": true,
+        "audio": false,
+        "video": false,
+        "toolCalling": true,
+        "structuredOutput": true,
+        "contextWindow": 1000000
+      },
+      "pricing": {
+        "inputPer1M": 0.35,
+        "outputPer1M": 1.15,
+        "currency": "USD",
+        "effectiveDate": "2026-08-28",
+        "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+      },
+      "observations": {
+        "qualityBenchmarks": [
+          {
+            "task": "reasoning",
+            "benchmark": "reasoning-catalog-baseline",
+            "rawScore": 0.84,
+            "normalizedScore": 84,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-llama-4-maverick",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "extraction",
+            "benchmark": "extraction-catalog-baseline",
+            "rawScore": 0.84,
+            "normalizedScore": 84,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-llama-4-maverick",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "summarization",
+            "benchmark": "summarization-catalog-baseline",
+            "rawScore": 0.84,
+            "normalizedScore": 84,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-llama-4-maverick",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "rag",
+            "benchmark": "rag-catalog-baseline",
+            "rawScore": 0.84,
+            "normalizedScore": 84,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-llama-4-maverick",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "agentic",
+            "benchmark": "agentic-catalog-baseline",
+            "rawScore": 0.84,
+            "normalizedScore": 84,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-llama-4-maverick",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          }
+        ],
+        "latency": {
+          "p50Ms": 330,
+          "p95Ms": 550,
+          "ttftMs": 860,
+          "outputTokensPerSecond": 102,
+          "benchmark": "Artificial Analysis LLM Leaderboard - Llama 4 Maverick",
+          "sourceUrl": "https://artificialanalysis.ai/leaderboards/models",
+          "measuredAt": "2026-08-30T00:00:00Z",
+          "sourceType": "independent-benchmark"
+        },
+        "reliability": {
+          "availabilityPercent": 99.89,
+          "errorRatePercent": 0,
+          "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+          "observedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "model.security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "Meta model hosting security documentation",
+              "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "metric": "model.pricing",
+          "value": "0.35/1.15",
+          "unit": "USD per 1M tokens",
+          "sourceType": "official-documentation",
+          "sourceName": "Meta model pricing",
+          "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "confidence": 95
+        }
+      ]
+    },
+    {
+      "id": "google-mistral-medium-3",
+      "name": "Mistral Medium 3",
+      "provider": "Mistral AI",
+      "hostingProviders": [
+        "Google Cloud"
+      ],
+      "capabilities": {
+        "text": true,
+        "image": false,
+        "audio": false,
+        "video": false,
+        "toolCalling": true,
+        "structuredOutput": true,
+        "contextWindow": 128000
+      },
+      "pricing": {
+        "inputPer1M": 0.4,
+        "outputPer1M": 2,
+        "currency": "USD",
+        "effectiveDate": "2026-08-28",
+        "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+      },
+      "observations": {
+        "qualityBenchmarks": [
+          {
+            "task": "reasoning",
+            "benchmark": "reasoning-catalog-baseline",
+            "rawScore": 0.84,
+            "normalizedScore": 84,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-mistral-medium-3",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "extraction",
+            "benchmark": "extraction-catalog-baseline",
+            "rawScore": 0.84,
+            "normalizedScore": 84,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-mistral-medium-3",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "summarization",
+            "benchmark": "summarization-catalog-baseline",
+            "rawScore": 0.84,
+            "normalizedScore": 84,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-mistral-medium-3",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "rag",
+            "benchmark": "rag-catalog-baseline",
+            "rawScore": 0.84,
+            "normalizedScore": 84,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-mistral-medium-3",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "agentic",
+            "benchmark": "agentic-catalog-baseline",
+            "rawScore": 0.84,
+            "normalizedScore": 84,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-mistral-medium-3",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          }
+        ],
+        "latency": {
+          "p50Ms": 330,
+          "p95Ms": 550,
+          "ttftMs": 2230,
+          "outputTokensPerSecond": 151,
+          "benchmark": "Artificial Analysis LLM Leaderboard - Mistral Medium 3.5",
+          "sourceUrl": "https://artificialanalysis.ai/leaderboards/models",
+          "measuredAt": "2026-08-30T00:00:00Z",
+          "sourceType": "independent-benchmark"
+        },
+        "reliability": {
+          "availabilityPercent": 99.89,
+          "errorRatePercent": 0,
+          "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+          "observedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "model.security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "Mistral AI model hosting security documentation",
+              "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "metric": "model.pricing",
+          "value": "0.4/2",
+          "unit": "USD per 1M tokens",
+          "sourceType": "official-documentation",
+          "sourceName": "Mistral AI model pricing",
+          "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "confidence": 95
+        }
+      ]
+    },
+    {
+      "id": "google-qwen3-next-80b",
+      "name": "Qwen3 Next 80B Thinking",
+      "provider": "Qwen",
+      "hostingProviders": [
+        "Google Cloud"
+      ],
+      "capabilities": {
+        "text": true,
+        "image": false,
+        "audio": false,
+        "video": false,
+        "toolCalling": true,
+        "structuredOutput": true,
+        "contextWindow": 262000
+      },
+      "pricing": {
+        "inputPer1M": 0.15,
+        "outputPer1M": 1.2,
+        "currency": "USD",
+        "effectiveDate": "2026-08-28",
+        "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+      },
+      "observations": {
+        "qualityBenchmarks": [
+          {
+            "task": "reasoning",
+            "benchmark": "reasoning-catalog-baseline",
+            "rawScore": 0.88,
+            "normalizedScore": 88,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-qwen3-next-80b",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "extraction",
+            "benchmark": "extraction-catalog-baseline",
+            "rawScore": 0.88,
+            "normalizedScore": 88,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-qwen3-next-80b",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "summarization",
+            "benchmark": "summarization-catalog-baseline",
+            "rawScore": 0.88,
+            "normalizedScore": 88,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-qwen3-next-80b",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "rag",
+            "benchmark": "rag-catalog-baseline",
+            "rawScore": 0.88,
+            "normalizedScore": 88,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-qwen3-next-80b",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "agentic",
+            "benchmark": "agentic-catalog-baseline",
+            "rawScore": 0.88,
+            "normalizedScore": 88,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-qwen3-next-80b",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          }
+        ],
+        "latency": {
+          "p50Ms": 360,
+          "p95Ms": 600,
+          "ttftMs": 2260,
+          "outputTokensPerSecond": 200,
+          "benchmark": "Artificial Analysis LLM Leaderboard - Qwen3 Next 80B A3B (Reasoning)",
+          "sourceUrl": "https://artificialanalysis.ai/leaderboards/models",
+          "measuredAt": "2026-08-30T00:00:00Z",
+          "sourceType": "independent-benchmark"
+        },
+        "reliability": {
+          "availabilityPercent": 99.89,
+          "errorRatePercent": 0,
+          "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+          "observedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "model.security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "Qwen model hosting security documentation",
+              "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "metric": "model.pricing",
+          "value": "0.15/1.2",
+          "unit": "USD per 1M tokens",
+          "sourceType": "official-documentation",
+          "sourceName": "Qwen model pricing",
+          "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "confidence": 95
+        }
+      ]
+    },
+    {
+      "id": "google-gpt-oss-120b",
+      "name": "gpt-oss-120b",
+      "provider": "OpenAI",
+      "hostingProviders": [
+        "Google Cloud"
+      ],
+      "capabilities": {
+        "text": true,
+        "image": false,
+        "audio": false,
+        "video": false,
+        "toolCalling": true,
+        "structuredOutput": true,
+        "contextWindow": 128000
+      },
+      "pricing": {
+        "inputPer1M": 0.09,
+        "outputPer1M": 0.36,
+        "currency": "USD",
+        "effectiveDate": "2026-08-28",
+        "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+      },
+      "observations": {
+        "qualityBenchmarks": [
+          {
+            "task": "reasoning",
+            "benchmark": "reasoning-catalog-baseline",
+            "rawScore": 0.82,
+            "normalizedScore": 82,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-gpt-oss-120b",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "extraction",
+            "benchmark": "extraction-catalog-baseline",
+            "rawScore": 0.82,
+            "normalizedScore": 82,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-gpt-oss-120b",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "summarization",
+            "benchmark": "summarization-catalog-baseline",
+            "rawScore": 0.82,
+            "normalizedScore": 82,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-gpt-oss-120b",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "rag",
+            "benchmark": "rag-catalog-baseline",
+            "rawScore": 0.82,
+            "normalizedScore": 82,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-gpt-oss-120b",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          },
+          {
+            "task": "agentic",
+            "benchmark": "agentic-catalog-baseline",
+            "rawScore": 0.82,
+            "normalizedScore": 82,
+            "sourceUrl": "urn:decision-catalog:baseline:model:google-gpt-oss-120b",
+            "retrievedAt": "2026-08-29T00:00:00Z",
+            "sourceType": "expert-rule"
+          }
+        ],
+        "latency": {
+          "p50Ms": 315,
+          "p95Ms": 525,
+          "ttftMs": 820,
+          "outputTokensPerSecond": 180,
+          "benchmark": "Artificial Analysis LLM Leaderboard - gpt-oss-120b (high)",
+          "sourceUrl": "https://artificialanalysis.ai/leaderboards/models",
+          "measuredAt": "2026-08-30T00:00:00Z",
+          "sourceType": "independent-benchmark"
+        },
+        "reliability": {
+          "availabilityPercent": 99.89,
+          "errorRatePercent": 0,
+          "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+          "observedAt": "2026-08-29T00:00:00Z",
+          "sourceType": "expert-rule"
+        },
+        "security": {
+          "controls": {
+            "encryptionAtRest": true,
+            "encryptionInTransit": true,
+            "privateNetworking": true,
+            "rbac": true,
+            "managedIdentity": true,
+            "auditLogging": true,
+            "secretManagement": true
+          },
+          "evidence": [
+            {
+              "metric": "model.security.controls",
+              "value": 7,
+              "unit": "supported controls",
+              "sourceType": "expert-rule",
+              "sourceName": "OpenAI model hosting security documentation",
+              "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+              "retrievedAt": "2026-08-29T00:00:00Z",
+              "confidence": 80
+            }
+          ]
+        }
+      },
+      "evidence": [
+        {
+          "metric": "model.pricing",
+          "value": "0.09/0.36",
+          "unit": "USD per 1M tokens",
+          "sourceType": "official-documentation",
+          "sourceName": "OpenAI model pricing",
+          "sourceUrl": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+          "retrievedAt": "2026-08-29T00:00:00Z",
+          "confidence": 95
+        }
+      ]
+    }
+  ],
+  "platforms": {
+    "Azure": {
+      "API Gateway": "Azure API Management",
+      "Event Stream": "Azure Event Hubs",
+      "Feature Store": "Azure Managed Redis",
+      "ML Inference": "Azure Machine Learning",
+      "Rules Engine": "Azure Functions",
+      "Operational DB": "Azure SQL Database",
+      "Monitoring": "Azure Monitor",
+      "Workflow Engine": "Durable Functions",
+      "ML Service": "Azure Machine Learning",
+      "AI Enrichment": "Azure OpenAI",
+      "Object Storage": "Azure Blob Storage",
+      "Document Processing": "Azure AI Document Intelligence",
+      "AI Model": "Azure OpenAI gpt-5.4-mini",
+      "Human Review": "Power Apps",
+      "Application": "Azure Container Apps",
+      "Search Index": "Azure AI Search",
+      "Embedding Model": "text-embedding-3-small",
+      "LLM": "Azure OpenAI gpt-5.4-mini",
+      "Document Store": "Azure Blob Storage",
+      "Agent Orchestrator": "Microsoft Foundry Agent Service",
+      "Tool Gateway": "Azure API Management",
+      "State Store": "Azure Cosmos DB",
+      "Human Approval": "Azure Logic Apps",
+      "Observability": "Application Insights",
+      "Load Balancer": "Azure Front Door",
+      "Application Services": "Azure Container Apps",
+      "Message Queue": "Azure Service Bus",
+      "Relational DB": "Azure SQL Database",
+      "Cache": "Azure Managed Redis",
+      "LLM Model": "Azure OpenAI gpt-5.4-mini",
+      "Security Guardrails": "Azure AI Content Safety + Prompt Shields",
+      "Identity & Access": "Microsoft Entra ID",
+      "Private Network": "Azure Virtual Network + Private Link",
+      "Microservices Runtime": "Azure Container Apps",
+      "Compliance Controls": "Azure Policy + Defender for Cloud",
+      "Service Mesh": "Azure Container Apps service discovery",
+      "Container Registry": "Azure Container Registry",
+      "Autoscaling": "KEDA autoscaling",
+      "Web Application Firewall": "Azure Web Application Firewall",
+      "Key Management": "Azure Key Vault",
+      "Data Protection": "Microsoft Purview",
+      "Integration Layer": "Azure Logic Apps"
+    },
+    "AWS": {
+      "API Gateway": "Amazon API Gateway",
+      "Event Stream": "Amazon Kinesis",
+      "Feature Store": "SageMaker Feature Store",
+      "ML Inference": "Amazon SageMaker",
+      "Rules Engine": "AWS Lambda",
+      "Operational DB": "Amazon Aurora",
+      "Monitoring": "Amazon CloudWatch",
+      "Workflow Engine": "AWS Step Functions",
+      "ML Service": "Amazon SageMaker",
+      "AI Enrichment": "Amazon Bedrock",
+      "Object Storage": "Amazon S3",
+      "Document Processing": "Amazon Textract",
+      "AI Model": "Amazon Bedrock",
+      "Human Review": "Amazon A2I",
+      "Application": "Amazon ECS",
+      "Search Index": "Amazon OpenSearch",
+      "Embedding Model": "Amazon Titan Embeddings",
+      "LLM": "Amazon Bedrock",
+      "Document Store": "Amazon S3",
+      "Agent Orchestrator": "Agents for Amazon Bedrock",
+      "Tool Gateway": "Amazon API Gateway",
+      "State Store": "Amazon DynamoDB",
+      "Human Approval": "AWS Step Functions",
+      "Observability": "AWS X-Ray",
+      "Load Balancer": "Application Load Balancer",
+      "Application Services": "Amazon ECS",
+      "Message Queue": "Amazon SQS",
+      "Relational DB": "Amazon Aurora",
+      "Cache": "Amazon ElastiCache",
+      "LLM Model": "Amazon Bedrock managed model",
+      "Security Guardrails": "Guardrails for Amazon Bedrock",
+      "Identity & Access": "AWS IAM",
+      "Private Network": "Amazon VPC + AWS PrivateLink",
+      "Microservices Runtime": "Amazon ECS",
+      "Compliance Controls": "AWS Config + Security Hub",
+      "Service Mesh": "AWS App Mesh",
+      "Container Registry": "Amazon ECR",
+      "Autoscaling": "AWS Application Auto Scaling",
+      "Web Application Firewall": "AWS WAF",
+      "Key Management": "AWS KMS",
+      "Data Protection": "Amazon Macie",
+      "Integration Layer": "Amazon EventBridge"
+    },
+    "Google Cloud": {
+      "API Gateway": "Apigee API Management",
+      "Event Stream": "Google Cloud Pub/Sub",
+      "Feature Store": "Vertex AI Feature Store",
+      "ML Inference": "Vertex AI Endpoints",
+      "Rules Engine": "Cloud Run functions",
+      "Operational DB": "Cloud SQL",
+      "Monitoring": "Cloud Monitoring",
+      "Workflow Engine": "Google Cloud Workflows",
+      "ML Service": "Vertex AI",
+      "AI Enrichment": "Vertex AI Gemini",
+      "Object Storage": "Cloud Storage",
+      "Document Processing": "Document AI",
+      "AI Model": "Vertex AI Gemini",
+      "Human Review": "AppSheet",
+      "Application": "Cloud Run",
+      "Search Index": "Vertex AI Search",
+      "Embedding Model": "Vertex AI Embeddings",
+      "LLM": "Vertex AI Gemini",
+      "Document Store": "Cloud Storage",
+      "Agent Orchestrator": "Vertex AI Agent Engine",
+      "Tool Gateway": "Apigee API Management",
+      "State Store": "Firestore",
+      "Human Approval": "Google Cloud Workflows",
+      "Observability": "Cloud Trace",
+      "Load Balancer": "Cloud Load Balancing",
+      "Application Services": "Cloud Run",
+      "Message Queue": "Google Cloud Pub/Sub",
+      "Relational DB": "Cloud SQL",
+      "Cache": "Memorystore",
+      "LLM Model": "Vertex AI Gemini",
+      "Security Guardrails": "Google Cloud Model Armor",
+      "Identity & Access": "Cloud IAM",
+      "Private Network": "Google Cloud VPC + Private Service Connect",
+      "Microservices Runtime": "Cloud Run",
+      "Compliance Controls": "Organization Policy + Security Command Center",
+      "Service Mesh": "Cloud Service Mesh",
+      "Container Registry": "Artifact Registry",
+      "Autoscaling": "Cloud Run autoscaling",
+      "Web Application Firewall": "Google Cloud Armor",
+      "Key Management": "Cloud KMS",
+      "Data Protection": "Sensitive Data Protection",
+      "Integration Layer": "Application Integration"
+    },
+    "Open source": {
+      "API Gateway": "Kong Gateway",
+      "Event Stream": "Apache Kafka",
+      "Feature Store": "Feast",
+      "ML Inference": "KServe",
+      "Rules Engine": "Drools",
+      "Operational DB": "PostgreSQL",
+      "Monitoring": "Prometheus + Grafana",
+      "Workflow Engine": "Temporal",
+      "ML Service": "MLflow + KServe",
+      "AI Enrichment": "vLLM",
+      "Object Storage": "MinIO",
+      "Document Processing": "Apache Tika",
+      "AI Model": "vLLM model serving",
+      "Human Review": "Custom review portal",
+      "Application": "Kubernetes",
+      "Search Index": "OpenSearch",
+      "Embedding Model": "Sentence Transformers",
+      "LLM": "vLLM model serving",
+      "Document Store": "MinIO",
+      "Agent Orchestrator": "LangGraph",
+      "Tool Gateway": "Kong Gateway",
+      "State Store": "PostgreSQL",
+      "Human Approval": "Temporal",
+      "Observability": "OpenTelemetry",
+      "Load Balancer": "NGINX",
+      "Application Services": "Kubernetes",
+      "Message Queue": "RabbitMQ",
+      "Relational DB": "PostgreSQL",
+      "Cache": "Valkey",
+      "LLM Model": "vLLM model serving",
+      "Security Guardrails": "NVIDIA NeMo Guardrails",
+      "Identity & Access": "Keycloak",
+      "Private Network": "Cilium network policies",
+      "Microservices Runtime": "Kubernetes",
+      "Compliance Controls": "Open Policy Agent",
+      "Service Mesh": "Istio",
+      "Container Registry": "Harbor",
+      "Autoscaling": "Kubernetes HPA + KEDA",
+      "Web Application Firewall": "ModSecurity",
+      "Key Management": "OpenBao",
+      "Data Protection": "OpenDLP",
+      "Integration Layer": "Apache Camel"
+    }
+  },
+  "provenanceStatus": "seed-baseline"
+}
